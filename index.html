@@ -1,0 +1,1014 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0C0E18">
+
+<!-- Personal page. Reachable by anyone with the link, but kept out of search
+     results. Delete these two lines (and robots.txt) to allow indexing. -->
+<meta name="robots" content="noindex, nofollow">
+
+<meta name="description" content="I couldn't send you flowers. So I grew you a field.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="A Field for Zoha">
+<meta property="og:description" content="I couldn't send you flowers. So I grew you a field.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#127803;</text></svg>">
+<style>*,*::before,*::after{box-sizing:border-box}body{margin:0}img,svg{display:block;max-width:100%}</style>
+</head>
+<body>
+<title>A Field for Zoha</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Karla:ital,wght@0,300..600;1,400&display=swap">
+
+<style>
+  :root{
+    --ink:        #F6EFE2;
+    --ink-soft:   #CFC3B0;
+    --ink-faint:  #9A8F80;
+    --night:      #0C0E18;
+    --gold:       #FFC64A;
+    --gold-deep:  #E5892A;
+    --paper:      #FBF3E4;
+    --paper-ink:  #3A2A18;
+    --paper-soft: #7A6448;
+    --glass:      rgba(16,14,22,.62);
+    --glass-line: rgba(255,214,130,.22);
+
+    --display: "Fraunces", "Iowan Old Style", Georgia, serif;
+    --body:    "Karla", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  *{ box-sizing:border-box; }
+
+  body{
+    margin:0;
+    background:var(--night);
+    color:var(--ink);
+    font-family:var(--body);
+    -webkit-font-smoothing:antialiased;
+    overflow:hidden;
+    height:100dvh;
+    touch-action:manipulation;
+    overscroll-behavior:none;
+  }
+
+  #field{
+    position:fixed; inset:0;
+    display:block;
+    width:100%; height:100%;
+    touch-action:none;
+    cursor:crosshair;
+  }
+
+  .vignette{
+    position:fixed; inset:0; pointer-events:none; z-index:2;
+    background:radial-gradient(120% 90% at 50% 58%, transparent 42%, rgba(6,5,10,.55) 100%);
+  }
+
+  .stage{ position:fixed; inset:0; z-index:3; pointer-events:none; }
+  .stage > *{ pointer-events:auto; }
+
+  /* ---------- intro ---------- */
+  .intro{
+    position:absolute; inset:0;
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    gap:1.4rem; padding:2rem 1.5rem;
+    text-align:center;
+    background:linear-gradient(180deg, rgba(9,8,14,.55), rgba(9,8,14,.2) 45%, rgba(9,8,14,.55));
+    transition:opacity .9s ease, visibility .9s;
+  }
+  .eyebrow{
+    font-family:var(--body);
+    font-size:.72rem; font-weight:500;
+    letter-spacing:.42em; text-transform:uppercase;
+    color:var(--gold); opacity:.85;
+  }
+  .intro h1{
+    margin:0;
+    font-family:var(--display);
+    font-variation-settings:"SOFT" 40, "WONK" 1, "opsz" 120;
+    font-weight:400; font-style:normal;
+    font-size:clamp(2.15rem, 7.4vw, 4.1rem);
+    line-height:1.06; letter-spacing:-.015em;
+    text-wrap:balance; max-width:16ch;
+  }
+  .intro h1 em{
+    display:block; font-style:italic; font-weight:300;
+    color:var(--gold); opacity:.94;
+  }
+  .intro p{
+    margin:0; max-width:34ch;
+    font-size:clamp(.94rem, 2.6vw, 1.02rem);
+    line-height:1.65; color:var(--ink-soft);
+  }
+
+  /* ---------- buttons ---------- */
+  .btn{
+    font-family:var(--body); font-size:.8rem; font-weight:600;
+    letter-spacing:.16em; text-transform:uppercase;
+    color:var(--night); background:var(--gold);
+    border:0; border-radius:999px;
+    padding:.85rem 1.7rem;
+    cursor:pointer;
+    transition:transform .25s cubic-bezier(.2,.8,.3,1), box-shadow .25s ease, background .25s ease;
+    box-shadow:0 0 0 0 rgba(255,198,74,.45), 0 10px 30px -12px rgba(255,198,74,.7);
+  }
+  .btn:hover{ transform:translateY(-2px); box-shadow:0 0 0 8px rgba(255,198,74,.1), 0 14px 34px -12px rgba(255,198,74,.8); }
+  .btn:active{ transform:translateY(0); }
+
+  .btn-ghost{
+    font-family:var(--body); font-size:.7rem; font-weight:500;
+    letter-spacing:.18em; text-transform:uppercase;
+    color:var(--ink-soft); background:transparent;
+    border:1px solid var(--glass-line); border-radius:999px;
+    padding:.55rem 1.1rem; cursor:pointer;
+    transition:color .2s ease, border-color .2s ease, background .2s ease;
+  }
+  .btn-ghost:hover{ color:var(--ink); border-color:rgba(255,214,130,.5); background:rgba(255,214,130,.07); }
+
+  .btn:focus-visible, .btn-ghost:focus-visible{
+    outline:2px solid var(--gold); outline-offset:3px;
+  }
+
+  /* ---------- hud ---------- */
+  .hud{
+    position:absolute; left:50%; bottom:max(1.4rem, env(safe-area-inset-bottom));
+    transform:translateX(-50%);
+    display:flex; flex-direction:column; align-items:center; gap:.85rem;
+    padding:.9rem 1.25rem 1rem;
+    border-radius:20px;
+    background:var(--glass);
+    border:1px solid var(--glass-line);
+    backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+    opacity:0; visibility:hidden;
+    transition:opacity .8s ease, visibility .8s;
+    max-width:min(92vw, 26rem);
+  }
+  .hud .label{
+    font-size:.68rem; font-weight:500;
+    letter-spacing:.2em; text-transform:uppercase;
+    color:var(--ink-faint); text-align:center;
+  }
+  .dots{ display:flex; gap:.5rem; }
+  .dots span{
+    width:7px; height:7px; border-radius:50%;
+    background:rgba(255,232,190,.2);
+    transition:background .5s ease, box-shadow .5s ease, transform .5s cubic-bezier(.2,.9,.3,1.4);
+  }
+  .dots span.on{
+    background:var(--gold); transform:scale(1.35);
+    box-shadow:0 0 12px rgba(255,198,74,.75);
+  }
+  .hud .actions{ display:flex; gap:.55rem; flex-wrap:wrap; justify-content:center; }
+
+  /* ---------- note ---------- */
+  .note{
+    position:absolute; left:0; top:0;
+    pointer-events:none;
+    width:max-content; max-width:min(20rem, 78vw);
+    padding:1rem 1.15rem;
+    border-radius:16px;
+    background:var(--glass);
+    border:1px solid var(--glass-line);
+    backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    box-shadow:0 24px 50px -24px rgba(0,0,0,.85);
+    font-family:var(--display);
+    font-variation-settings:"SOFT" 40, "opsz" 20;
+    font-size:1.02rem; font-style:italic; font-weight:300;
+    line-height:1.55; color:var(--ink);
+    transform:translate(-50%,-100%) translateY(8px);
+    opacity:0; visibility:hidden;
+    transition:opacity .7s ease, transform .7s cubic-bezier(.2,.8,.3,1), visibility .7s;
+  }
+  .note.below{ transform:translate(-50%,0) translateY(-8px); }
+  .note.show{ opacity:1; visibility:visible; transform:translate(-50%,-100%) translateY(0); }
+  .note.show.below{ transform:translate(-50%,0) translateY(0); }
+  .note em{ color:var(--gold); font-style:italic; }
+  .note .count{
+    display:block; margin-bottom:.5rem;
+    font-family:var(--body); font-style:normal;
+    font-size:.6rem; font-weight:600; letter-spacing:.24em; text-transform:uppercase;
+    color:var(--gold); opacity:.8;
+  }
+
+  /* ---------- letter ---------- */
+  .letter-wrap{
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    padding:1.25rem;
+    background:rgba(10,8,14,.5);
+    backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px);
+    opacity:0; visibility:hidden;
+    transition:opacity .9s ease, visibility .9s;
+  }
+  .letter-wrap.show{ opacity:1; visibility:visible; }
+
+  .letter{
+    position:relative;
+    width:min(38rem, 100%);
+    max-height:min(86dvh, 46rem);
+    overflow-y:auto;
+    padding:clamp(1.75rem, 5vw, 3rem);
+    background:var(--paper);
+    color:var(--paper-ink);
+    border-radius:3px;
+    box-shadow:0 40px 90px -30px rgba(0,0,0,.75), 0 2px 0 rgba(255,255,255,.35) inset;
+    transform:rotate(-.5deg) translateY(26px) scale(.98);
+    transition:transform 1s cubic-bezier(.2,.8,.3,1);
+    background-image:linear-gradient(180deg, rgba(255,255,255,.7), transparent 30%);
+  }
+  .letter-wrap.show .letter{ transform:rotate(-.5deg) translateY(0) scale(1); }
+
+  .letter .stamp{
+    font-family:var(--body);
+    font-size:.62rem; font-weight:600; letter-spacing:.3em; text-transform:uppercase;
+    color:var(--gold-deep);
+    display:flex; align-items:center; gap:.75rem;
+  }
+  .letter .stamp::after{
+    content:""; flex:1; height:1px;
+    background:linear-gradient(90deg, rgba(229,137,42,.45), transparent);
+  }
+  .letter h2{
+    margin:1.1rem 0 1.4rem;
+    font-family:var(--display);
+    font-variation-settings:"SOFT" 40, "WONK" 1, "opsz" 90;
+    font-weight:400; font-size:clamp(1.7rem, 5.2vw, 2.4rem);
+    line-height:1.12; letter-spacing:-.01em; text-wrap:balance;
+  }
+  .letter p{
+    margin:0 0 1.05rem;
+    font-size:1rem; line-height:1.78;
+    color:#4A3724;
+    max-width:62ch;
+  }
+  .letter p:first-of-type{ font-size:1.06rem; }
+  .letter .sig{
+    margin-top:1.6rem;
+    font-family:var(--display); font-style:italic; font-weight:400;
+    font-size:1.3rem; color:var(--paper-ink);
+  }
+  .letter .sig .name{
+    white-space:nowrap;
+  }
+  .letter .ps{
+    margin-top:1.75rem; padding-top:1.25rem;
+    border-top:1px solid rgba(122,100,72,.22);
+    font-size:.88rem; line-height:1.7; color:var(--paper-soft);
+  }
+  .letter:focus{ outline:none; }
+
+  .letter .close{
+    margin-top:1.9rem;
+    font-family:var(--body); font-size:.7rem; font-weight:600;
+    letter-spacing:.18em; text-transform:uppercase;
+    color:var(--paper-soft); background:transparent;
+    border:1px solid rgba(122,100,72,.35); border-radius:999px;
+    padding:.6rem 1.2rem; cursor:pointer;
+    transition:color .2s, border-color .2s, background .2s;
+  }
+  .letter .close:hover{ color:var(--paper-ink); border-color:var(--paper-ink); background:rgba(122,100,72,.08); }
+  .letter .close:focus-visible{ outline:2px solid var(--gold-deep); outline-offset:3px; }
+
+  /* ---------- top line ---------- */
+  .topline{
+    position:absolute; top:max(1.1rem, env(safe-area-inset-top)); left:50%;
+    transform:translateX(-50%);
+    display:flex; align-items:center; gap:.75rem;
+    padding:.5rem .5rem .5rem 1rem;
+    border-radius:999px;
+    background:var(--glass); border:1px solid var(--glass-line);
+    backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+    font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-faint);
+    opacity:0; visibility:hidden;
+    transition:opacity .8s ease, visibility .8s;
+    white-space:nowrap;
+  }
+
+  .is-hidden{ opacity:0 !important; visibility:hidden !important; }
+  .is-shown{ opacity:1 !important; visibility:visible !important; }
+
+  @media (max-width:560px){
+    .topline #toplineText{ display:none; }
+    .topline{ padding:.4rem; gap:0; }
+  }
+
+  @media (max-width:520px){
+    .letter p{ font-size:.96rem; line-height:1.72; }
+    .note{ font-size:.96rem; }
+    .topline{ font-size:.62rem; padding:.45rem .45rem .45rem .85rem; }
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{ animation-duration:.01ms !important; transition-duration:.16s !important; }
+  }
+</style>
+
+<canvas id="field" aria-hidden="true"></canvas>
+<div class="vignette"></div>
+
+<div class="stage">
+
+  <div class="topline" id="topline">
+    <span id="toplineText">Your field is saved</span>
+    <button class="btn-ghost" id="reopen" type="button">Read the letter</button>
+  </div>
+
+  <div class="note" id="note" role="status" aria-live="polite"></div>
+
+  <div class="hud" id="hud">
+    <div class="label" id="hudLabel">Tap anywhere on the dark</div>
+    <div class="dots" id="dots" aria-hidden="true"></div>
+    <div class="actions">
+      <button class="btn-ghost" id="plantBtn" type="button">Plant one</button>
+    </div>
+  </div>
+
+  <div class="intro" id="intro">
+    <span class="eyebrow">for Zoha</span>
+    <h1 id="introTitle">I couldn&rsquo;t send you flowers.<em>So I grew you a field.</em></h1>
+    <p id="introText">Seven sunflowers are waiting under there, and each one is holding something I should have said sooner. Tap the dark to bring them up.</p>
+    <button class="btn" id="startBtn" type="button">Plant the first one</button>
+  </div>
+
+  <div class="letter-wrap" id="letterWrap">
+    <article class="letter" id="letter" tabindex="-1">
+      <div class="stamp">Sunrise &middot; the rest of it</div>
+      <h2>Everything the flowers couldn&rsquo;t hold</h2>
+      <p>Zoha,</p>
+      <p>Busy is a reason. It isn&rsquo;t a good enough one. You don&rsquo;t get whatever&rsquo;s left of me after everything else got loud. That&rsquo;s not the deal, and I let it become the deal anyway.</p>
+      <p>I couldn&rsquo;t get sunflowers to your door this week, and that bothered me more than it should have, it&rsquo;s such a small thing to get right. So I sat down and made you these instead. They took hours. That was the point. Time is the thing I owe you, so I spent some of it here.</p>
+      <p>I&rsquo;m not asking you to be fine yet. Be annoyed with me as long as you need to be; you&rsquo;ve earned it. I&rsquo;ll be here the whole time, facing your direction.</p>
+      <p>I am sorry. I love you more than anything I have ever loved. We will be together and then I will send you the real flowers.</p>
+      <p class="sig">&mdash; <span class="name">Kaleem Cheema</span></p>
+      <p class="ps">P.S. Your field saves itself. Close this, come back next week, and every flower you planted will still be standing exactly where you put it.</p>
+      <button class="close" id="closeLetter" type="button">Back to the field</button>
+    </article>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var FINE    = window.matchMedia("(pointer: fine)").matches;
+  var TAU     = Math.PI * 2;
+  var GOLDEN  = Math.PI * (3 - Math.sqrt(5));   // the 137.5-degree golden angle, in radians
+  var TARGET  = 7;
+  var STORE   = "zoha-field-v1";
+
+  var NOTES = [
+    "I&rsquo;m sorry. Not the quick kind, the kind that knows exactly what it&rsquo;s apologising for.",
+    "You asked for my time and I kept saying <em>soon</em>. Soon isn&rsquo;t a plan. It&rsquo;s a way of not choosing.",
+    "Busy was true. It was also an excuse. Both can be true, and only one of them is fair to you.",
+    "I couldn&rsquo;t get flowers to your door this week. So I sat down and grew these instead, one at a time, thinking about you the whole way.",
+    "Young sunflowers follow the sun all day. Grown ones stop and face east, toward where it rises. I want to be the second kind, pointed at you steadily, not only when it&rsquo;s easy.",
+    "The seeds in one of these sit 137.5&deg; apart, the one angle where nothing crowds anything else out. I want my days built like that, with real room left in them for you.",
+    "I&rsquo;m not asking you to stop being angry, Zoha. I&rsquo;m asking for the chance to do better, starting tonight."
+  ];
+
+  var EXTRA = [
+    "Another one. I&rsquo;ve got the time now.",
+    "Keep going. There&rsquo;s no limit on this.",
+    "One for every day I said <em>soon</em>.",
+    "This whole field is yours. Fill it.",
+    "Still here. Still sorry. Still yours."
+  ];
+
+  /* ================= canvas ================= */
+
+  var cvs = document.getElementById("field");
+  var ctx = cvs.getContext("2d");
+  var W = 0, H = 0, DPR = 1, horizon = 0;
+
+  function resize(){
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth;
+    H = window.innerHeight;
+    cvs.width  = Math.round(W * DPR);
+    cvs.height = Math.round(H * DPR);
+    cvs.style.width  = W + "px";
+    cvs.style.height = H + "px";
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    horizon = H * (W < 640 ? 0.60 : 0.66);
+  }
+
+  /* ---- colour helpers ---- */
+  function hex(h){
+    return [parseInt(h.slice(1,3),16), parseInt(h.slice(3,5),16), parseInt(h.slice(5,7),16)];
+  }
+  function mix(a, b, t){
+    var A = hex(a), B = hex(b);
+    return "rgb(" + Math.round(A[0]+(B[0]-A[0])*t) + "," +
+                    Math.round(A[1]+(B[1]-A[1])*t) + "," +
+                    Math.round(A[2]+(B[2]-A[2])*t) + ")";
+  }
+
+  var SKIES = [
+    { top:"#0B0D17", mid:"#171B2C", low:"#2B2640", earth:"#0A0B12", earthLow:"#050609", sun:"#4E4260", star:1.00 },
+    { top:"#2A2743", mid:"#5E4459", low:"#B06B57", earth:"#1B1620", earthLow:"#0D0A12", sun:"#E0854F", star:0.30 },
+    { top:"#6E7FA8", mid:"#E3A45F", low:"#FFD79A", earth:"#4E3822", earthLow:"#21160B", sun:"#FFEDC2", star:0.00 }
+  ];
+
+  function sky(p){
+    var i = p < 0.5 ? 0 : 1;
+    var t = p < 0.5 ? p * 2 : (p - 0.5) * 2;
+    var a = SKIES[i], b = SKIES[i+1];
+    return {
+      top: mix(a.top, b.top, t),
+      mid: mix(a.mid, b.mid, t),
+      low: mix(a.low, b.low, t),
+      earth: mix(a.earth, b.earth, t),
+      earthLow: mix(a.earthLow, b.earthLow, t),
+      sun: mix(a.sun, b.sun, t),
+      star: a.star + (b.star - a.star) * t
+    };
+  }
+
+  /* ---- head sprites (shared, six variants) ---- */
+  var TINTS = [
+    ["#FFE08A","#FFC33F","#E08722"],
+    ["#FFD968","#F5A92C","#D67A1E"],
+    ["#FFE7A6","#FFCB57","#E89430"],
+    ["#FFCF52","#EE9C26","#CE6F1B"],
+    ["#FFDD7C","#FAB93C","#DD8626"],
+    ["#FFC93F","#E99522","#C66A18"]
+  ];
+  var SPR_R = 70, SPR_PAD = 8, SPR_SIZE = SPR_R * 2 + SPR_PAD * 2;
+  var sprites = [];
+
+  function petalPath(g, len, wid){
+    g.beginPath();
+    g.moveTo(0, 0);
+    g.bezierCurveTo( wid,      -len*0.26,  wid*0.72, -len*0.80, 0, -len);
+    g.bezierCurveTo(-wid*0.72, -len*0.80, -wid,      -len*0.26, 0, 0);
+    g.closePath();
+  }
+
+  function ring(g, count, len, wid, offset, light, mid, dark, squash){
+    for (var i = 0; i < count; i++){
+      var a = offset + (i / count) * TAU;
+      var wobble = Math.sin(i * 2.7) * 0.045;
+      g.save();
+      g.rotate(a + wobble);
+      g.scale(1, squash);
+      var grad = g.createLinearGradient(0, 0, 0, -len);
+      grad.addColorStop(0,    dark);
+      grad.addColorStop(0.42, mid);
+      grad.addColorStop(0.88, light);
+      grad.addColorStop(1,    mid);
+      g.fillStyle = grad;
+      petalPath(g, len * (1 + Math.sin(i * 1.9) * 0.05), wid);
+      g.fill();
+      g.strokeStyle = "rgba(150,80,15,.16)";
+      g.lineWidth = 0.7;
+      g.stroke();
+      g.restore();
+    }
+  }
+
+  function makeSprite(v){
+    var t = TINTS[v];
+    var s = Math.min(window.devicePixelRatio || 1, 2);
+    var c = document.createElement("canvas");
+    c.width  = SPR_SIZE * s;
+    c.height = SPR_SIZE * s;
+    var g = c.getContext("2d");
+    g.setTransform(s, 0, 0, s, 0, 0);
+    g.translate(SPR_SIZE / 2, SPR_SIZE / 2);
+
+    // back ring - 13 petals, Fibonacci
+    ring(g, 13, SPR_R * 0.99, SPR_R * 0.215, 0.19, t[1], t[2], "#B45C15", 0.98);
+    // front ring - 21 petals, Fibonacci
+    ring(g, 21, SPR_R * 0.83, SPR_R * 0.20, 0.0, t[0], t[1], t[2], 1.0);
+
+    var seedR = SPR_R * 0.395;
+
+    // ring of immature florets at the rim of the disc
+    for (var f = 0; f < 46; f++){
+      var fa = (f / 46) * TAU;
+      g.beginPath();
+      g.arc(Math.cos(fa) * seedR * 1.02, Math.sin(fa) * seedR * 1.02, seedR * 0.085, 0, TAU);
+      g.fillStyle = "rgba(214,146,44,.9)";
+      g.fill();
+    }
+
+    // disc base
+    var disc = g.createRadialGradient(-seedR*0.25, -seedR*0.3, seedR*0.08, 0, 0, seedR);
+    disc.addColorStop(0,   "#6A4523");
+    disc.addColorStop(0.6, "#3E2611");
+    disc.addColorStop(1,   "#25150A");
+    g.beginPath();
+    g.arc(0, 0, seedR, 0, TAU);
+    g.fillStyle = disc;
+    g.fill();
+
+    // seeds on the golden-angle spiral
+    var N = 300;
+    for (var i = 0; i < N; i++){
+      var ang = i * GOLDEN;
+      var rad = seedR * 0.985 * Math.sqrt(i / N);
+      var x = Math.cos(ang) * rad;
+      var y = Math.sin(ang) * rad;
+      var sz = 0.9 + 1.9 * (rad / seedR);
+      var shade = rad / seedR;
+      g.save();
+      g.translate(x, y);
+      g.rotate(ang);
+      g.scale(1, 0.6);
+      g.beginPath();
+      g.arc(0, 0, sz, 0, TAU);
+      g.fillStyle = mix("#2A180C", "#8A5A24", shade * shade);
+      g.fill();
+      g.restore();
+    }
+
+    // soft light on the disc
+    var sheen = g.createRadialGradient(-seedR*0.4, -seedR*0.45, 0, -seedR*0.4, -seedR*0.45, seedR*1.25);
+    sheen.addColorStop(0, "rgba(255,214,150,.20)");
+    sheen.addColorStop(1, "rgba(255,214,150,0)");
+    g.beginPath();
+    g.arc(0, 0, seedR, 0, TAU);
+    g.fillStyle = sheen;
+    g.fill();
+
+    return c;
+  }
+
+  for (var v = 0; v < TINTS.length; v++) sprites.push(makeSprite(v));
+
+  /* ---- flowers ---- */
+  var flowers = [];
+
+  function makeFlower(xr, yr, saved){
+    var rnd = Math.random;
+    var f = saved || {
+      xr: xr, yr: yr,
+      v: Math.floor(rnd() * TINTS.length),
+      lean: (rnd() - 0.5) * 0.34,
+      stem: 0.62 + rnd() * 0.5,
+      head: 0.82 + rnd() * 0.42,
+      spin: (rnd() - 0.5) * 0.5,
+      phase: rnd() * TAU,
+      tilt: (rnd() - 0.5) * 0.22
+    };
+    f.born = performance.now();
+    return f;
+  }
+
+  function vunit(){
+    return 0.64 + 0.36 * Math.max(0, Math.min(1, (W - 360) / 920));
+  }
+
+  function depth(f){
+    var y = f.yr * H;
+    var d = (y - horizon) / Math.max(H - horizon, 1);
+    d = Math.max(0, Math.min(1, d));
+    // blooms scale with the viewport, so a phone gets a field and not three giants
+    return (0.52 + d * 0.60) * vunit();
+  }
+
+  function easeOutCubic(t){ return 1 - Math.pow(1 - t, 3); }
+  function easeOutBack(t){ var c = 1.9; return 1 + (c+1)*Math.pow(t-1,3) + c*Math.pow(t-1,2); }
+
+  function drawLeaf(g, len, up){
+    g.beginPath();
+    g.moveTo(0, 0);
+    g.bezierCurveTo(len*0.30, -len*0.36*up, len*0.76, -len*0.26*up, len, -len*0.04*up);
+    g.bezierCurveTo(len*0.74,  len*0.20*up, len*0.32,  len*0.30*up, 0, 0);
+    g.closePath();
+  }
+
+  function drawFlower(f, now, wind){
+    var age = (now - f.born) / (REDUCED ? 220 : 1500);
+    var t = Math.max(0, Math.min(1, age));
+    if (t <= 0) return;
+
+    var grow = easeOutCubic(t);
+    var pop  = t < 1 ? easeOutBack(Math.max(0, Math.min(1, (t - 0.32) / 0.68))) : 1;
+    if (pop <= 0) pop = 0;
+
+    var sc = depth(f);
+    var bx = f.xr * W;
+    var by = f.yr * H;
+    var len = 190 * f.stem * sc * grow;
+    var sway = REDUCED ? 0 : Math.sin(wind + f.phase) * (7 + 5 * f.stem) * sc;
+
+    var hx = bx + f.lean * len + sway;
+    var hy = by - len;
+    var cx = bx + f.lean * len * 0.18 + sway * 0.28;
+    var cy = by - len * 0.55;
+
+    // stem
+    var sg = ctx.createLinearGradient(bx, by, hx, hy);
+    sg.addColorStop(0, "#2E4726");
+    sg.addColorStop(1, "#698E4E");
+    ctx.beginPath();
+    ctx.moveTo(bx, by);
+    ctx.quadraticCurveTo(cx, cy, hx, hy);
+    ctx.strokeStyle = sg;
+    ctx.lineWidth = Math.max(1.4, 6.2 * sc * (0.6 + grow * 0.4));
+    ctx.lineCap = "round";
+    ctx.stroke();
+
+    // leaves ride on the stem curve
+    var leafGrow = Math.max(0, Math.min(1, (t - 0.18) / 0.5));
+    if (leafGrow > 0){
+      var spots = [0.34, 0.58];
+      for (var i = 0; i < spots.length; i++){
+        var u = spots[i], iu = 1 - u;
+        var lx = iu*iu*bx + 2*iu*u*cx + u*u*hx;
+        var ly = iu*iu*by + 2*iu*u*cy + u*u*hy;
+        var dir = i % 2 === 0 ? 1 : -1;
+        var ll = 46 * sc * leafGrow * (i === 0 ? 1 : 0.82);
+        ctx.save();
+        ctx.translate(lx, ly);
+        ctx.rotate(dir === 1 ? -0.42 + f.lean : Math.PI + 0.42 + f.lean);
+        var lg = ctx.createLinearGradient(0, 0, ll, 0);
+        lg.addColorStop(0, "#2B4423");
+        lg.addColorStop(1, "#5C8244");
+        ctx.fillStyle = lg;
+        drawLeaf(ctx, ll, dir);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    // head
+    if (pop > 0){
+      var r = SPR_R * f.head * sc * pop;
+      var size = (SPR_SIZE / SPR_R) * r;
+      ctx.save();
+      ctx.translate(hx, hy);
+      ctx.rotate(f.spin + f.tilt + (REDUCED ? 0 : Math.sin(wind + f.phase) * 0.035));
+      ctx.drawImage(sprites[f.v], -size/2, -size/2, size, size);
+      ctx.restore();
+    }
+  }
+
+  /* ---- pollen ---- */
+  var motes = [];
+  function seedMotes(){
+    motes.length = 0;
+    var n = REDUCED ? 0 : (W < 640 ? 26 : 48);
+    for (var i = 0; i < n; i++){
+      motes.push({
+        x: Math.random(), y: Math.random(),
+        r: 0.6 + Math.random() * 1.9,
+        sp: 0.1 + Math.random() * 0.35,
+        dr: Math.random() * TAU
+      });
+    }
+  }
+
+  /* ---- stars ---- */
+  var stars = [];
+  for (var s = 0; s < 130; s++){
+    stars.push({ x: Math.random(), y: Math.random() * 0.62, r: Math.random() * 1.1 + 0.25, tw: Math.random() * TAU });
+  }
+
+  /* ---- pointer ghost ---- */
+  var ghost = { x: -999, y: -999, on: false };
+
+  /* ---- render loop ---- */
+  var prog = 0, progTarget = 0, start = performance.now(), last = start;
+
+  function frame(now){
+    var time = (now - start) / 1000;
+    var wind = time * 0.55;
+
+    // time-based easing, so a backgrounded tab still catches up on return
+    var dt = Math.min(0.1, (now - last) / 1000);
+    last = now;
+    prog += (progTarget - prog) * (1 - Math.exp(-dt * 1.5));
+
+    var c = sky(prog);
+
+    var g = ctx.createLinearGradient(0, 0, 0, horizon);
+    g.addColorStop(0,    c.top);
+    g.addColorStop(0.55, c.mid);
+    g.addColorStop(1,    c.low);
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, horizon + 1);
+
+    // stars
+    if (c.star > 0.01){
+      for (var i = 0; i < stars.length; i++){
+        var st = stars[i];
+        var tw = REDUCED ? 0.8 : 0.55 + Math.sin(time * 1.3 + st.tw) * 0.45;
+        ctx.beginPath();
+        ctx.arc(st.x * W, st.y * horizon, st.r, 0, TAU);
+        ctx.fillStyle = "rgba(233,231,244," + (c.star * tw * 0.85).toFixed(3) + ")";
+        ctx.fill();
+      }
+    }
+
+    // sun
+    var sunY = horizon + H * 0.28 - (H * 0.28 + H * 0.14) * prog;
+    var sunR = (52 + 26 * prog) * vunit();
+    var halo = ctx.createRadialGradient(W * 0.72, sunY, 0, W * 0.72, sunY, sunR * 7);
+    halo.addColorStop(0,    "rgba(255,214,150," + (0.30 + 0.42 * prog).toFixed(3) + ")");
+    halo.addColorStop(0.35, "rgba(255,180,110," + (0.10 + 0.20 * prog).toFixed(3) + ")");
+    halo.addColorStop(1,    "rgba(255,180,110,0)");
+    ctx.fillStyle = halo;
+    ctx.fillRect(0, 0, W, horizon + 2);
+    if (prog > 0.18){
+      ctx.beginPath();
+      ctx.arc(W * 0.72, sunY, sunR, 0, TAU);
+      ctx.fillStyle = c.sun;
+      ctx.globalAlpha = Math.min(1, (prog - 0.18) * 2.2);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+
+    // earth
+    var eg = ctx.createLinearGradient(0, horizon, 0, H);
+    eg.addColorStop(0,    c.earth);
+    eg.addColorStop(1,    c.earthLow);
+    ctx.fillStyle = eg;
+    ctx.fillRect(0, horizon, W, H - horizon + 1);
+
+    // atmospheric haze, so the horizon reads as distance rather than a cut
+    var haze = ctx.createLinearGradient(0, horizon, 0, horizon + Math.max(46, H * 0.09));
+    haze.addColorStop(0, c.low);
+    haze.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.save();
+    ctx.globalAlpha = 0.30 + 0.30 * prog;
+    ctx.fillStyle = haze;
+    ctx.fillRect(0, horizon, W, Math.max(46, H * 0.09));
+    ctx.restore();
+
+    // warm rim on the horizon
+    var rim = ctx.createLinearGradient(0, horizon - 26, 0, horizon + 16);
+    rim.addColorStop(0, "rgba(255,196,120,0)");
+    rim.addColorStop(0.55, "rgba(255,196,120," + (0.10 + 0.34 * prog).toFixed(3) + ")");
+    rim.addColorStop(1, "rgba(255,196,120,0)");
+    ctx.fillStyle = rim;
+    ctx.fillRect(0, horizon - 26, W, 44);
+
+    // flowers, far to near
+    flowers.sort(function(a, b){ return a.yr - b.yr; });
+    for (var k = 0; k < flowers.length; k++) drawFlower(flowers[k], now, wind);
+
+    // pollen
+    if (motes.length){
+      for (var m = 0; m < motes.length; m++){
+        var p = motes[m];
+        p.y -= p.sp * 0.0009;
+        p.x += Math.sin(time * 0.5 + p.dr) * 0.00035;
+        if (p.y < -0.02){ p.y = 1.02; p.x = Math.random(); }
+        ctx.beginPath();
+        ctx.arc(p.x * W, p.y * H, p.r, 0, TAU);
+        ctx.fillStyle = "rgba(255,224,160," + (0.10 + 0.34 * prog).toFixed(3) + ")";
+        ctx.fill();
+      }
+    }
+
+    // where your finger is
+    if (ghost.on && FINE && !REDUCED && stage === "plant"){
+      var pulse = 0.5 + Math.sin(time * 2.4) * 0.5;
+      ctx.beginPath();
+      ctx.arc(ghost.x, ghost.y, 13 + pulse * 5, 0, TAU);
+      ctx.strokeStyle = "rgba(255,208,120," + (0.28 + pulse * 0.28).toFixed(3) + ")";
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(ghost.x, ghost.y, 2.2, 0, TAU);
+      ctx.fillStyle = "rgba(255,224,160,.85)";
+      ctx.fill();
+    }
+
+    requestAnimationFrame(frame);
+  }
+
+  /* ================= experience ================= */
+
+  var intro      = document.getElementById("intro");
+  var introTitle = document.getElementById("introTitle");
+  var introText  = document.getElementById("introText");
+  var startBtn   = document.getElementById("startBtn");
+  var hud        = document.getElementById("hud");
+  var hudLabel   = document.getElementById("hudLabel");
+  var dotsEl     = document.getElementById("dots");
+  var plantBtn   = document.getElementById("plantBtn");
+  var note       = document.getElementById("note");
+  var letterWrap = document.getElementById("letterWrap");
+  var letter     = document.getElementById("letter");
+  var closeBtn   = document.getElementById("closeLetter");
+  var topline    = document.getElementById("topline");
+  var reopen     = document.getElementById("reopen");
+
+  var stage = "intro";
+  var planted = 0;
+  var extraIdx = 0;
+  var noteTimer = null;
+
+  for (var d = 0; d < TARGET; d++) dotsEl.appendChild(document.createElement("span"));
+  var dotEls = dotsEl.querySelectorAll("span");
+
+  /* ---- storage ---- */
+  function load(){
+    try {
+      var raw = window.localStorage.getItem(STORE);
+      if (!raw) return null;
+      var data = JSON.parse(raw);
+      return (data && Array.isArray(data.f)) ? data : null;
+    } catch (e){ return null; }
+  }
+  function save(){
+    try {
+      window.localStorage.setItem(STORE, JSON.stringify({
+        n: planted,
+        f: flowers.slice(0, 220).map(function(f){
+          return { xr:f.xr, yr:f.yr, v:f.v, lean:f.lean, stem:f.stem,
+                   head:f.head, spin:f.spin, phase:f.phase, tilt:f.tilt };
+        })
+      }));
+    } catch (e){ /* private mode - the field just won't persist */ }
+  }
+
+  /* ---- planting ---- */
+  function plantAt(px, py){
+    var yr = Math.max(horizon / H + 0.012, Math.min(0.985, py / H));
+    var xr = Math.max(0.035, Math.min(0.965, px / W));
+    var f = makeFlower(xr, yr, null);
+    flowers.push(f);
+    planted++;
+    progTarget = Math.min(1, planted / TARGET);
+    updateHud();
+    save();
+    showNote(f);
+  }
+
+  function plantRandom(){
+    var px = W * (0.12 + Math.random() * 0.76);
+    var py = horizon + (H - horizon) * (0.12 + Math.random() * 0.76);
+    plantAt(px, py);
+  }
+
+  function headPoint(f){
+    var sc = depth(f);
+    var len = 190 * f.stem * sc;
+    return {
+      x: f.xr * W + f.lean * len,
+      y: f.yr * H - len,
+      r: SPR_R * f.head * sc
+    };
+  }
+
+  function showNote(f){
+    var idx = planted - 1;
+    var text, badge;
+    if (idx < NOTES.length){
+      text = NOTES[idx];
+      badge = (idx + 1) + " of " + TARGET;
+    } else {
+      text = EXTRA[extraIdx % EXTRA.length];
+      extraIdx++;
+      badge = "no. " + planted;
+    }
+
+    note.classList.remove("show");
+    clearTimeout(noteTimer);
+    noteTimer = setTimeout(function(){
+      note.innerHTML = '<span class="count">' + badge + "</span>" + text;
+      var pt = headPoint(f);
+      note.classList.remove("below");
+      note.style.left = pt.x + "px";
+      note.style.top  = Math.round(pt.y - pt.r * 0.95) + "px";
+      note.style.visibility = "hidden";
+      note.classList.add("show");
+
+      // measure, then keep it fully on screen
+      var nw = note.offsetWidth, nh = note.offsetHeight;
+      var left = Math.max(nw/2 + 14, Math.min(W - nw/2 - 14, pt.x));
+      var top  = Math.round(pt.y - pt.r * 0.95);
+      if (top - nh < 16){
+        note.classList.add("below");
+        top = Math.min(H - nh - 16, pt.y + pt.r * 0.95);
+      }
+      note.style.left = left + "px";
+      note.style.top  = top + "px";
+      note.style.visibility = "";
+
+      if (planted === TARGET) setTimeout(openLetter, 2600);
+    }, REDUCED ? 120 : 900);
+  }
+
+  /* ---- hud ---- */
+  function updateHud(){
+    for (var i = 0; i < dotEls.length; i++){
+      dotEls[i].classList.toggle("on", i < planted);
+    }
+    if (planted >= TARGET){
+      hudLabel.textContent = "Keep planting";
+      plantBtn.textContent = "Plant another";
+    } else {
+      hudLabel.textContent = planted === 0
+        ? "Tap anywhere on the dark"
+        : (TARGET - planted) + (TARGET - planted === 1 ? " still to come" : " still under there");
+    }
+  }
+
+  /* ---- letter ---- */
+  function openLetter(){
+    stage = "letter";
+    note.classList.remove("show");
+    hud.classList.remove("is-shown");
+    hud.classList.add("is-hidden");
+    letterWrap.classList.add("show");
+    topline.classList.remove("is-shown");
+    topline.classList.add("is-hidden");
+    letter.scrollTop = 0;
+    setTimeout(function(){ letter.focus(); }, 400);
+  }
+
+  function closeLetter(){
+    stage = "plant";
+    letterWrap.classList.remove("show");
+    hud.classList.remove("is-hidden");
+    hud.classList.add("is-shown");
+    topline.classList.remove("is-hidden");
+    topline.classList.add("is-shown");
+    updateHud();
+  }
+
+  function begin(){
+    stage = "plant";
+    intro.classList.add("is-hidden");
+    hud.classList.add("is-shown");
+    updateHud();
+    if (planted >= TARGET){
+      topline.classList.add("is-shown");
+    }
+    setTimeout(function(){ intro.style.display = "none"; }, 950);
+  }
+
+  /* ---- events ---- */
+  startBtn.addEventListener("click", function(e){
+    e.stopPropagation();
+    begin();
+    if (planted === 0) setTimeout(plantRandom, 500);
+  });
+  intro.addEventListener("pointerdown", function(e){
+    if (stage !== "intro") return;
+    if (e.target.closest("button")) return;   // the button runs its own click handler
+    var px = e.clientX, py = e.clientY;
+    begin();
+    if (planted === 0) setTimeout(function(){ plantAt(px, py); }, 420);
+  });
+  plantBtn.addEventListener("click", function(e){ e.stopPropagation(); plantRandom(); });
+  closeBtn.addEventListener("click", closeLetter);
+  reopen.addEventListener("click", function(e){ e.stopPropagation(); openLetter(); });
+  letterWrap.addEventListener("click", function(e){ if (e.target === letterWrap) closeLetter(); });
+
+  document.addEventListener("keydown", function(e){
+    if (e.key === "Escape" && stage === "letter") closeLetter();
+  });
+
+  cvs.addEventListener("pointerdown", function(e){
+    if (stage !== "plant") return;
+    plantAt(e.clientX, e.clientY);
+  });
+  cvs.addEventListener("pointermove", function(e){
+    ghost.x = e.clientX; ghost.y = e.clientY; ghost.on = true;
+  });
+  cvs.addEventListener("pointerleave", function(){ ghost.on = false; });
+
+  window.addEventListener("resize", function(){
+    resize();
+    seedMotes();
+    if (note.classList.contains("show")) note.classList.remove("show");
+  });
+
+  /* ---- boot ---- */
+  resize();
+  seedMotes();
+
+  var saved = load();
+  if (saved && saved.f.length){
+    var t0 = performance.now() - 4000;
+    for (var q = 0; q < saved.f.length; q++){
+      var sf = saved.f[q];
+      sf.born = t0;
+      flowers.push(sf);
+    }
+    planted = Math.max(saved.n || 0, saved.f.length);
+    prog = progTarget = Math.min(1, planted / TARGET);
+    introTitle.innerHTML = "Your field is still standing.<em>Nothing you planted is gone.</em>";
+    introText.textContent = "Everything is exactly where you left it. Tap the dark to add more, or read the letter again.";
+    startBtn.textContent = "Walk back in";
+    updateHud();
+  }
+
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
