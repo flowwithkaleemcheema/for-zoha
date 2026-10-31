@@ -1,0 +1,1492 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#070A1C">
+
+<!-- Personal page. Reachable by anyone with the link, but kept out of search
+     results. Delete these two lines (and robots.txt) to allow indexing. -->
+<meta name="robots" content="noindex, nofollow">
+
+<meta name="description" content="The moon on your birthday is exactly half lit. Come outside.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Happy birthday, Zoha">
+<meta property="og:description" content="The moon on your birthday is exactly half lit. Come outside.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#127769;</text></svg>">
+<style>*,*::before,*::after{box-sizing:border-box}body{margin:0}img,svg{display:block;max-width:100%}</style>
+</head>
+<body>
+<title>Half a Moon for Zoha</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Hanken+Grotesk:ital,wght@0,300..600;1,400&family=Pinyon+Script&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@500&display=swap&text=%D8%B3%D8%A7%D9%84%DA%AF%D8%B1%DB%81%20%D9%85%D8%A8%D8%A7%D8%B1%DA%A9">
+
+<style>
+  /* Layout: one full-screen night sky (canvas) with two houses on opposite hills;
+     every piece of text floats over it as glass, and the letter arrives on lantern paper. */
+  :root{
+    color-scheme: dark;
+
+    --night:      #070A1C;
+    --ink:        #EEF0F8;
+    --ink-soft:   #BCC2DA;
+    --ink-faint:  #8088A8;
+    --moon:       #E9E6DA;
+    --lantern:    #FFB75E;
+    --flame:      #FFE3A3;
+    --ember:      #E9793A;
+    --glass:      rgba(12,16,38,.62);
+    --glass-line: rgba(226,214,255,.16);
+    --paper:      #F8F1E4;
+    --paper-ink:  #2D2533;
+    --paper-soft: #6E6272;
+    --paper-line: rgba(110,98,114,.22);
+
+    --display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+    --body:    "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+    --script:  "Pinyon Script", "Snell Roundhand", "Apple Chancery", cursive;
+    --urdu:    "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", "Urdu Typesetting", serif;
+  }
+
+  *{ box-sizing:border-box; }
+  [hidden]{ display:none !important; }
+  html, body{ height:100%; }
+  body{
+    margin:0;
+    background:var(--night);
+    color:var(--ink);
+    font-family:var(--body);
+    -webkit-font-smoothing:antialiased;
+    overflow:hidden;
+    touch-action:manipulation;
+    overscroll-behavior:none;
+  }
+
+  #sky{
+    position:fixed; inset:0;
+    display:block; width:100%; height:100%;
+    touch-action:none;
+  }
+  .vignette{
+    position:fixed; inset:0; pointer-events:none; z-index:2;
+    background:radial-gradient(130% 95% at 50% 45%, transparent 50%, rgba(3,4,12,.6) 100%);
+  }
+  .stage{ position:fixed; inset:0; z-index:3; pointer-events:none; }
+  .stage > *{ pointer-events:auto; }
+
+  /* ---------- intro ---------- */
+  .intro{
+    position:absolute; inset:0;
+    display:flex; align-items:center;
+    padding-block:2rem;
+    padding-left:max(16px, env(safe-area-inset-left, 0px));
+    padding-right:max(16px, env(safe-area-inset-right, 0px));
+    background:linear-gradient(90deg, rgba(5,7,20,.78) 0%, rgba(5,7,20,.45) 48%, rgba(5,7,20,0) 78%);
+    transition:opacity 1.1s ease, visibility 1.1s;
+  }
+  .intro-inner{
+    display:flex; flex-direction:column; gap:1.35rem;
+    max-width:34rem;
+    margin-left:clamp(0rem, 7vw, 7rem);
+  }
+  .eyebrow{
+    display:flex; align-items:center; gap:.85rem; flex-wrap:wrap;
+    margin:0;
+    font-size:.72rem; font-weight:500; letter-spacing:.34em; text-transform:uppercase;
+    color:var(--lantern);
+  }
+  .eyebrow .urdu{
+    font-family:var(--urdu); font-weight:500;
+    font-size:1.05rem; letter-spacing:0; text-transform:none;
+    line-height:2.1; color:var(--flame);
+  }
+  .eyebrow .sep{ width:22px; height:1px; background:currentColor; opacity:.5; }
+  .intro h1{
+    margin:0;
+    font-family:var(--display);
+    font-weight:400; font-style:italic;
+    font-size:clamp(2.6rem, 8.4vw, 5.4rem);
+    line-height:.98; letter-spacing:-.02em;
+    text-wrap:balance;
+  }
+  .intro h1 em{
+    display:block;
+    font-family:var(--script); font-style:normal; font-weight:400;
+    font-size:1.5em; line-height:1.05; letter-spacing:0;
+    color:var(--flame);
+    text-shadow:0 0 30px rgba(255,183,94,.35);
+    margin-top:.06em;
+  }
+  .lede{
+    margin:0; max-width:36ch;
+    font-size:clamp(1rem, 2.7vw, 1.1rem); line-height:1.7;
+    color:var(--ink-soft);
+  }
+  .countdown{
+    margin:0;
+    font-size:.78rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--ink-faint);
+    font-variant-numeric:tabular-nums;
+  }
+  .countdown b{ color:var(--flame); font-weight:600; }
+  .intro-actions{ display:flex; gap:.8rem; flex-wrap:wrap; align-items:center; }
+
+  /* ---------- buttons ---------- */
+  .btn{
+    font-family:var(--body); font-size:.8rem; font-weight:600;
+    letter-spacing:.16em; text-transform:uppercase;
+    color:#1B1206; background:var(--lantern);
+    border:0; border-radius:999px;
+    padding:.95rem 1.8rem;
+    cursor:pointer;
+    box-shadow:0 0 0 0 rgba(255,183,94,.4), 0 12px 34px -12px rgba(255,170,80,.85);
+    transition:transform .25s cubic-bezier(.2,.8,.3,1), box-shadow .25s ease;
+  }
+  .btn:hover{ transform:translateY(-2px); box-shadow:0 0 0 8px rgba(255,183,94,.12), 0 16px 40px -12px rgba(255,170,80,.9); }
+  .btn:active{ transform:translateY(0); }
+  .btn-ghost{
+    font-family:var(--body); font-size:.7rem; font-weight:500;
+    letter-spacing:.18em; text-transform:uppercase;
+    color:var(--ink-soft); background:transparent;
+    border:1px solid var(--glass-line); border-radius:999px;
+    padding:.6rem 1.15rem; cursor:pointer;
+    transition:color .2s, border-color .2s, background .2s;
+  }
+  .btn-ghost:hover{ color:var(--ink); border-color:rgba(255,214,150,.5); background:rgba(255,214,150,.07); }
+  .btn:focus-visible, .btn-ghost:focus-visible, .sound:focus-visible{
+    outline:2px solid var(--lantern); outline-offset:3px;
+  }
+
+  /* ---------- sound toggle ---------- */
+  .sound{
+    position:absolute;
+    top:calc(env(safe-area-inset-top, 0px) + 14px);
+    right:calc(env(safe-area-inset-right, 0px) + 14px);
+    display:flex; align-items:center; gap:.5rem;
+    padding:.5rem .85rem;
+    font-family:var(--body); font-size:.64rem; font-weight:500;
+    letter-spacing:.18em; text-transform:uppercase;
+    color:var(--ink-soft);
+    background:var(--glass); border:1px solid var(--glass-line); border-radius:999px;
+    backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+    cursor:pointer;
+    transition:opacity .8s ease, visibility .8s, color .2s;
+  }
+  .sound i{
+    width:7px; height:7px; border-radius:50%;
+    background:var(--lantern); box-shadow:0 0 10px var(--lantern);
+    transition:background .2s, box-shadow .2s;
+  }
+  .sound[aria-pressed="false"] i{ background:var(--ink-faint); box-shadow:none; }
+
+  /* ---------- caption (one wish at a time) ---------- */
+  .caption{
+    position:absolute; left:50%; top:27%;
+    width:min(31rem, calc(100% - 2 * max(16px, env(safe-area-inset-left, 0px))));
+    transform:translate(-50%, -50%) translateY(10px);
+    padding:1.15rem 1.35rem 1.25rem;
+    border-radius:18px;
+    background:var(--glass);
+    border:1px solid var(--glass-line);
+    backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    box-shadow:0 30px 60px -30px rgba(0,0,0,.9);
+    font-family:var(--display); font-style:italic; font-weight:400;
+    font-size:clamp(1.05rem, 3.2vw, 1.22rem); line-height:1.55;
+    color:var(--ink);
+    text-wrap:pretty;
+    pointer-events:none;
+    opacity:0; visibility:hidden;
+    transition:opacity .8s ease, transform .8s cubic-bezier(.2,.8,.3,1), visibility .8s;
+  }
+  .caption.show{ opacity:1; visibility:visible; transform:translate(-50%, -50%); }
+  .caption.interactive{ pointer-events:auto; }
+  .cap-actions{ display:flex; gap:.5rem; flex-wrap:wrap; margin-top:1rem; }
+  .cap-note{
+    margin:.7rem 0 0;
+    font-family:var(--body); font-style:normal;
+    font-size:.74rem; letter-spacing:.04em; line-height:1.5;
+    color:var(--ink-faint);
+  }
+  .cap-note:empty{ display:none; }
+  .caption .count{
+    display:flex; align-items:center; gap:.6rem;
+    margin-bottom:.55rem;
+    font-family:var(--body); font-style:normal;
+    font-size:.6rem; font-weight:600; letter-spacing:.26em; text-transform:uppercase;
+    color:var(--lantern);
+  }
+  .caption .count::before{
+    content:""; width:8px; height:10px; border-radius:3px 3px 2px 2px;
+    background:linear-gradient(180deg, var(--ember), var(--flame));
+    box-shadow:0 0 10px rgba(255,183,94,.8);
+  }
+
+  /* ---------- hud ---------- */
+  .hud{
+    position:absolute; left:50%;
+    bottom:calc(env(safe-area-inset-bottom, 0px) + 1.2rem);
+    transform:translateX(-50%);
+    display:flex; flex-direction:column; align-items:center; gap:.8rem;
+    width:max-content; max-width:calc(100% - 32px);
+    padding:.85rem 1.2rem .95rem;
+    border-radius:20px;
+    background:var(--glass); border:1px solid var(--glass-line);
+    backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+    transition:opacity .8s ease, visibility .8s;
+  }
+  .hud .label{
+    font-size:.7rem; font-weight:500; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--ink-soft); text-align:center; line-height:1.5;
+  }
+  .dots{ display:flex; gap:.55rem; }
+  .dots:empty{ display:none; }
+  .dots span{
+    width:7px; height:9px; border-radius:3px 3px 2px 2px;
+    background:rgba(226,214,255,.18);
+    transition:background .5s, box-shadow .5s, transform .5s cubic-bezier(.2,.9,.3,1.4);
+  }
+  .dots span.on{
+    background:linear-gradient(180deg, var(--ember), var(--flame));
+    transform:translateY(-2px) scale(1.2);
+    box-shadow:0 0 12px rgba(255,183,94,.8);
+  }
+  .hud .actions{ display:flex; gap:.55rem; flex-wrap:wrap; justify-content:center; }
+
+  /* ---------- finale words under the name ---------- */
+  .finale{
+    position:absolute; left:50%; top:50%;
+    transform:translate(-50%, 0);
+    margin:0;
+    width:calc(100% - 32px);
+    text-align:center;
+    font-family:var(--display); font-style:italic; font-weight:400;
+    font-size:clamp(1.15rem, 3.6vw, 1.7rem); letter-spacing:.01em;
+    color:var(--ink);
+    text-shadow:0 2px 24px rgba(5,7,20,.9);
+    pointer-events:none;
+    opacity:0; visibility:hidden;
+    transition:opacity 1.6s ease, visibility 1.6s;
+  }
+  .finale small{
+    display:block; margin-top:.5rem;
+    font-family:var(--body); font-style:normal;
+    font-size:.62rem; font-weight:500; letter-spacing:.32em; text-transform:uppercase;
+    color:var(--lantern);
+  }
+
+  /* ---------- letter ---------- */
+  .letter-wrap{
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    padding-block:1.25rem;
+    padding-left:max(16px, env(safe-area-inset-left, 0px));
+    padding-right:max(16px, env(safe-area-inset-right, 0px));
+    background:rgba(4,6,18,.55);
+    backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px);
+    opacity:0; visibility:hidden;
+    transition:opacity 1s ease, visibility 1s;
+  }
+  .letter-wrap.show{ opacity:1; visibility:visible; }
+  .letter{
+    position:relative;
+    width:min(38rem, 100%);
+    max-height:min(88dvh, 50rem);
+    overflow-y:auto;
+    padding:clamp(1.75rem, 5.5vw, 3.2rem);
+    color:var(--paper-ink);
+    background-color:var(--paper);
+    background-image:
+      radial-gradient(120% 70% at 50% 0%, rgba(255,214,150,.28), transparent 60%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .38 0 0 0 0 .3 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    border-radius:4px;
+    box-shadow:0 0 0 1px rgba(255,214,150,.25), 0 0 80px -10px rgba(255,183,94,.35), 0 50px 100px -40px rgba(0,0,0,.9);
+    transform:translateY(30px) scale(.97);
+    transition:transform 1.1s cubic-bezier(.2,.8,.3,1);
+  }
+  .letter-wrap.show .letter{ transform:none; }
+  .letter:focus{ outline:none; }
+  .letter .pressed{
+    position:absolute; top:clamp(.6rem, 2vw, 1.2rem); right:clamp(.6rem, 2vw, 1.4rem);
+    width:clamp(70px, 16vw, 104px); height:auto;
+    transform:rotate(14deg);
+    opacity:.9; mix-blend-mode:multiply;
+    pointer-events:none;
+  }
+  .letter .stamp{
+    display:flex; align-items:center; gap:.75rem;
+    margin-right:5.5rem;
+    font-size:.62rem; font-weight:600; letter-spacing:.28em; text-transform:uppercase;
+    color:var(--ember);
+  }
+  .letter .stamp::after{
+    content:""; flex:1; height:1px;
+    background:linear-gradient(90deg, rgba(233,121,58,.45), transparent);
+  }
+  .letter h2{
+    margin:1.1rem 5rem 1.5rem 0;
+    font-family:var(--display); font-style:italic; font-weight:400;
+    font-size:clamp(1.8rem, 5.6vw, 2.6rem);
+    line-height:1.08; letter-spacing:-.015em;
+    text-wrap:balance;
+  }
+  .letter p{
+    margin:0 0 1.05rem;
+    font-size:1.01rem; line-height:1.8;
+    color:#463A48;
+    max-width:62ch;
+    text-wrap:pretty;
+  }
+  .letter .sig{
+    margin-top:1.8rem; margin-bottom:0;
+    font-family:var(--display); font-style:italic;
+    font-size:1.15rem; color:var(--paper-ink);
+  }
+  .letter .sig .name{
+    display:block;
+    font-family:var(--script); font-style:normal;
+    font-size:2.6rem; line-height:1.15;
+    color:#3A2C3E;
+  }
+  .letter .ps{
+    margin-top:1.8rem; padding-top:1.2rem;
+    border-top:1px solid var(--paper-line);
+    font-size:.9rem; line-height:1.7; color:var(--paper-soft);
+  }
+  .letter .ps a{ color:#B4561F; text-underline-offset:3px; }
+  .letter .ps a:focus-visible{ outline:2px solid var(--ember); outline-offset:2px; border-radius:2px; }
+  .letter .close{
+    margin-top:1.6rem;
+    font-family:var(--body); font-size:.7rem; font-weight:600;
+    letter-spacing:.18em; text-transform:uppercase;
+    color:var(--paper-soft); background:transparent;
+    border:1px solid rgba(110,98,114,.38); border-radius:999px;
+    padding:.65rem 1.25rem; cursor:pointer;
+    transition:color .2s, border-color .2s, background .2s;
+  }
+  .letter .close:hover{ color:var(--paper-ink); border-color:var(--paper-ink); background:rgba(110,98,114,.08); }
+  .letter .close:focus-visible{ outline:2px solid var(--ember); outline-offset:3px; }
+
+  .is-hidden{ opacity:0 !important; visibility:hidden !important; }
+  .is-shown{ opacity:1 !important; visibility:visible !important; }
+
+  @media (max-width:640px){
+    .intro{
+      align-items:flex-end;
+      padding-block:2rem 6.5rem;
+      background:linear-gradient(0deg, rgba(5,7,20,.86) 0%, rgba(5,7,20,.55) 55%, rgba(5,7,20,0) 85%);
+    }
+    .intro-inner{ margin-left:0; gap:1.1rem; }
+    .letter h2{ margin-right:3.5rem; }
+    .letter .stamp{ margin-right:4rem; }
+    .letter p{ font-size:.97rem; line-height:1.74; }
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{ animation-duration:.01ms !important; transition-duration:.2s !important; }
+  }
+</style>
+
+<canvas id="sky" aria-hidden="true"></canvas>
+<div class="vignette"></div>
+
+<div class="stage">
+
+  <button class="sound is-hidden" id="soundBtn" type="button" aria-pressed="true"><i></i><span id="soundText">Sound on</span></button>
+
+  <div class="caption" id="caption" role="status" aria-live="polite"></div>
+
+  <p class="finale" id="finale">Happy birthday, my love.<small>Look between the two houses</small></p>
+
+  <div class="hud is-hidden" id="hud">
+    <div class="label" id="hudLabel">Make a wish</div>
+    <div class="dots" id="dots" aria-hidden="true"></div>
+    <div class="actions" id="actions"></div>
+  </div>
+
+  <section class="intro" id="intro">
+    <div class="intro-inner">
+      <p class="eyebrow"><span class="urdu" lang="ur" dir="rtl">سالگرہ مبارک</span><span class="sep" aria-hidden="true"></span><span>1 November</span></p>
+      <h1>Happy birthday,<em>Zoha</em></h1>
+      <p class="lede" id="lede">The moon on your birthday is exactly half lit. The other half is still up there in the dark, whole, waiting for the light to reach it. I&rsquo;ve been thinking about that all week.</p>
+      <p class="countdown" id="countdown" hidden></p>
+      <div class="intro-actions">
+        <button class="btn" id="startBtn" type="button">Come outside</button>
+        <button class="btn-ghost" id="skipBtn" type="button" hidden>Read your letter</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="letter-wrap" id="letterWrap">
+    <article class="letter" id="letter" tabindex="-1" aria-labelledby="letterTitle">
+      <img class="pressed" id="pressed" alt="" width="104" height="104">
+      <div class="stamp">1 November &middot; under a half moon</div>
+      <h2 id="letterTitle">The other half of the moon</h2>
+      <p>Zoha,</p>
+      <p>Happy birthday. I wanted today to be simple for you, and I know it isn&rsquo;t completely. Our families aren&rsquo;t where we want them to be. Some days it feels like we&rsquo;re standing on two hills with all of it sitting in the valley between us.</p>
+      <p>So I keep coming back to the moon on your birthday. Half of it is lit and half of it is dark, and nobody looks up and thinks the moon is broken. Everyone knows the rest of it is there. It&rsquo;s whole. The light just hasn&rsquo;t reached that side yet.</p>
+      <p>That&rsquo;s how I see us. Some of what we have, the people around us can&rsquo;t see yet. It&rsquo;s still whole. I don&rsquo;t wonder whether it&rsquo;s real. I&rsquo;m only waiting for the light, and I am very good at waiting for you.</p>
+      <p>Did you see the little lights between the two houses? They started from both ends and met in the middle. That&rsquo;s the only way I want this to happen. Patiently, with respect for your family and for mine, one small light at a time, for as long as it takes.</p>
+      <p>But today isn&rsquo;t about any of that. Today is about you. You are the kindest, bravest, most beautiful person I know, and the world got lucky the day you arrived in it. I&rsquo;m so glad you were born. I&rsquo;m so glad it&rsquo;s you.</p>
+      <p class="sig">Happy birthday, my love.<span class="name">Kaleem</span></p>
+      <p class="ps">P.S. Your sunflower field is still standing, exactly where you left it. <a href="https://flowwithkaleemcheema.github.io/for-zoha/" target="_blank" rel="noopener">Go and visit it</a>. And I still owe you the real ones.</p>
+      <button class="close" id="closeLetter" type="button">Back outside</button>
+    </article>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var TAU     = Math.PI * 2;
+  var GOLDEN  = Math.PI * (3 - Math.sqrt(5));
+  var STORE   = "zoha-birthday-v1";
+  var BIRTHDAY = new Date(2026, 10, 1, 0, 0, 0);   // 1 November 2026, midnight, her local time
+
+  var WISHES = [
+    "I wish you a year that is gentler with you than this one was. You carried so much. I hope you finally get to put some of it down.",
+    "I wish you the kind of laughing where you have to sit down and wipe your eyes. Often. Ideally because of me.",
+    "I wish you peace at home. The real kind, where nobody has to pick a side and nobody has to stay quiet to keep it.",
+    "I wish you never once believe any of this is your fault. It isn&rsquo;t. Loving someone was never the wrong thing.",
+    "I wish our families find their way to each other. And if it takes longer than a year, I wish you always remember that I&rsquo;m not going anywhere.",
+    "I wish you sunflowers at your door, the real ones. Actually, that one isn&rsquo;t a wish. It&rsquo;s a promise, and I&rsquo;m keeping it.",
+    "I wish you slow mornings, chai that&rsquo;s still hot, and whole days that ask nothing hard of you.",
+    "And I wish for us. Every year on this day, under the same sky, a little closer than the year before."
+  ];
+  var EXTRA = [
+    "One more, because one more never hurt anyone.",
+    "This one is just to see you smile.",
+    "For every birthday I get to stand next to you for.",
+    "Still here. Still yours. Still facing your direction.",
+    "For the year after this one, and the one after that.",
+    "The sky is yours tonight. Fill it."
+  ];
+
+  /* ================= canvas ================= */
+
+  var cvs = document.getElementById("sky");
+  var ctx = cvs.getContext("2d");
+  var W = 0, H = 0, DPR = 1, VU = 1;
+
+  function clamp(v, a, b){ return v < a ? a : v > b ? b : v; }
+  function ease(t){ return t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2; }
+  function easeOut(t){ return 1 - Math.pow(1 - t, 3); }
+
+  /* ---- sprites ---- */
+  function makeCanvas(w, h){
+    var c = document.createElement("canvas");
+    c.width = w; c.height = h;
+    return c;
+  }
+
+  // warm glow, drawn additively for lanterns, windows and the lights of the name
+  var glow = (function(){
+    var c = makeCanvas(128, 128), g = c.getContext("2d");
+    var r = g.createRadialGradient(64, 64, 0, 64, 64, 64);
+    r.addColorStop(0,    "rgba(255,246,220,1)");
+    r.addColorStop(0.12, "rgba(255,222,160,.9)");
+    r.addColorStop(0.35, "rgba(255,178,92,.32)");
+    r.addColorStop(0.7,  "rgba(255,150,70,.07)");
+    r.addColorStop(1,    "rgba(255,150,70,0)");
+    g.fillStyle = r; g.fillRect(0, 0, 128, 128);
+    return c;
+  })();
+
+  // a paper sky lantern, wider at the shoulders, open and bright at the bottom
+  var LW = 40, LH = 56, LS = 3;
+  var lanternSprite = (function(){
+    var c = makeCanvas(LW * LS, LH * LS), g = c.getContext("2d");
+    g.scale(LS, LS);
+    function body(){
+      g.beginPath();
+      g.moveTo(11, 50);
+      g.lineTo(5.5, 15);
+      g.quadraticCurveTo(5, 5.5, 20, 5);
+      g.quadraticCurveTo(35, 5.5, 34.5, 15);
+      g.lineTo(29, 50);
+      g.closePath();
+    }
+    body();
+    var lg = g.createLinearGradient(0, 50, 0, 5);
+    lg.addColorStop(0,    "#FFF4CF");
+    lg.addColorStop(0.28, "#FFCB72");
+    lg.addColorStop(0.68, "#F28E3E");
+    lg.addColorStop(1,    "#B5502C");
+    g.fillStyle = lg; g.fill();
+    g.save(); body(); g.clip();
+    var ig = g.createRadialGradient(20, 50, 0, 20, 46, 26);
+    ig.addColorStop(0, "rgba(255,252,232,.95)");
+    ig.addColorStop(1, "rgba(255,252,232,0)");
+    g.fillStyle = ig; g.fillRect(0, 0, LW, LH);
+    // paper seams
+    g.strokeStyle = "rgba(150,64,24,.22)"; g.lineWidth = .6;
+    [-.55, -.18, .18, .55].forEach(function(k){
+      g.beginPath(); g.moveTo(20 + k * 15, 6.5); g.lineTo(20 + k * 10, 50); g.stroke();
+    });
+    g.beginPath(); g.moveTo(5.8, 18); g.quadraticCurveTo(20, 21, 34.2, 18); g.stroke();
+    g.restore();
+    g.beginPath(); g.ellipse(20, 50, 9, 1.8, 0, 0, TAU);
+    g.fillStyle = "rgba(120,58,24,.75)"; g.fill();
+    g.beginPath(); g.ellipse(20, 47.6, 2.2, 3, 0, 0, TAU);
+    g.fillStyle = "#FFFBEA"; g.fill();
+    return c;
+  })();
+
+  /* ---- the moon: last quarter, the way it hangs on 1 November 2026 ---- */
+  var moon = { lit:null, dark:null, R:40, x:0, y:0, earth:.34, earthTarget:.34 };
+
+  function makeMoon(R){
+    var S = Math.ceil(R * 2 + 4), s = Math.min(window.devicePixelRatio || 1, 2);
+    var tex = makeCanvas(S * s, S * s), g = tex.getContext("2d");
+    g.scale(s, s); g.translate(S / 2, S / 2);
+    g.save();
+    g.beginPath(); g.arc(0, 0, R, 0, TAU); g.clip();
+    var base = g.createRadialGradient(-R*.2, -R*.25, R*.1, 0, 0, R);
+    base.addColorStop(0, "#F6F3E9");
+    base.addColorStop(.8, "#DCD7CA");
+    base.addColorStop(1, "#B5B0A4");
+    g.fillStyle = base; g.fillRect(-R, -R, R*2, R*2);
+    // maria, roughly where they sit on the near side
+    var maria = [
+      [-.55,-.05,.40,.24],[-.30,-.40,.27,.26],[.18,-.38,.17,.24],[.28,-.08,.21,.22],
+      [.66,-.30,.12,.26],[.50,.16,.15,.18],[-.20,.38,.18,.18],[-.50,.40,.11,.2],
+      [.33,.30,.09,.18],[-.05,-.68,.24,.12],[-.75,.20,.14,.14]
+    ];
+    maria.forEach(function(m){
+      var mg = g.createRadialGradient(m[0]*R, m[1]*R, 0, m[0]*R, m[1]*R, m[2]*R);
+      mg.addColorStop(0, "rgba(98,96,104," + m[3] + ")");
+      mg.addColorStop(.7, "rgba(98,96,104," + (m[3]*.6) + ")");
+      mg.addColorStop(1, "rgba(98,96,104,0)");
+      g.fillStyle = mg; g.fillRect(-R, -R, R*2, R*2);
+    });
+    // small craters
+    var seed = 7;
+    function rnd(){ seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+    for (var i = 0; i < 70; i++){
+      var a = rnd() * TAU, d = Math.sqrt(rnd()) * R * .95, cr = (rnd() * .045 + .01) * R;
+      g.beginPath(); g.arc(Math.cos(a)*d, Math.sin(a)*d, cr, 0, TAU);
+      g.fillStyle = rnd() > .5 ? "rgba(255,255,250,.10)" : "rgba(80,78,86,.10)";
+      g.fill();
+    }
+    // Tycho and its rays
+    g.strokeStyle = "rgba(255,255,248,.07)"; g.lineWidth = R * .02;
+    for (var k = 0; k < 9; k++){
+      var ra = k / 9 * TAU + .2;
+      g.beginPath(); g.moveTo(-.12*R, .70*R);
+      g.lineTo(-.12*R + Math.cos(ra)*R*.7, .70*R + Math.sin(ra)*R*.7); g.stroke();
+    }
+    g.beginPath(); g.arc(-.12*R, .70*R, R*.035, 0, TAU);
+    g.fillStyle = "rgba(255,255,250,.55)"; g.fill();
+    g.restore();
+
+    // the dark half, faintly visible by earthshine
+    var dark = makeCanvas(tex.width, tex.height), dg = dark.getContext("2d");
+    dg.drawImage(tex, 0, 0);
+    dg.globalCompositeOperation = "source-atop";
+    dg.fillStyle = "rgba(22,30,66,.78)";
+    dg.fillRect(0, 0, dark.width, dark.height);
+
+    // the lit half: left side, a hair past half (about 54 percent)
+    var lit = makeCanvas(tex.width, tex.height), lgc = lit.getContext("2d");
+    lgc.scale(s, s); lgc.translate(S / 2, S / 2);
+    lgc.beginPath();
+    lgc.arc(0, 0, R + .5, -Math.PI / 2, Math.PI / 2, true);
+    lgc.ellipse(0, 0, R * .08, R + .5, 0, Math.PI / 2, -Math.PI / 2, true);
+    lgc.closePath();
+    lgc.save(); lgc.clip();
+    lgc.drawImage(tex, -S / 2, -S / 2, S, S);
+    var term = lgc.createLinearGradient(-R * .5, 0, R * .09, 0);
+    term.addColorStop(0, "rgba(14,18,40,0)");
+    term.addColorStop(.6, "rgba(14,18,40,.28)");
+    term.addColorStop(1, "rgba(14,18,40,.8)");
+    lgc.fillStyle = term; lgc.fillRect(-R, -R, R * 2, R * 2);
+    lgc.restore();
+
+    moon.lit = lit; moon.dark = dark; moon.R = R; moon.S = S;
+  }
+
+  /* ---- a small pressed sunflower for the corner of the letter ---- */
+  function pressedSunflower(){
+    var size = 208, c = makeCanvas(size, size), g = c.getContext("2d");
+    g.translate(size / 2, size / 2);
+    for (var i = 0; i < 21; i++){
+      var a = i / 21 * TAU + Math.sin(i * 2.3) * .06;
+      var len = 82 + Math.sin(i * 1.7) * 7;
+      g.save(); g.rotate(a);
+      g.beginPath();
+      g.moveTo(0, 0);
+      g.bezierCurveTo(15, -len * .3, 11, -len * .82, 0, -len);
+      g.bezierCurveTo(-11, -len * .82, -15, -len * .3, 0, 0);
+      var pg = g.createLinearGradient(0, 0, 0, -len);
+      pg.addColorStop(0, "rgba(176,104,40,.85)");
+      pg.addColorStop(.6, "rgba(214,160,72,.8)");
+      pg.addColorStop(1, "rgba(196,140,64,.7)");
+      g.fillStyle = pg; g.fill();
+      g.strokeStyle = "rgba(120,70,30,.25)"; g.lineWidth = 1; g.stroke();
+      g.restore();
+    }
+    g.beginPath(); g.arc(0, 0, 34, 0, TAU);
+    g.fillStyle = "rgba(78,48,28,.9)"; g.fill();
+    for (var j = 0; j < 160; j++){
+      var r = 33 * Math.sqrt(j / 160), aa = j * GOLDEN;
+      g.beginPath(); g.arc(Math.cos(aa) * r, Math.sin(aa) * r, 1.1 + r / 26, 0, TAU);
+      g.fillStyle = "rgba(150,100,52,.55)"; g.fill();
+    }
+    return c.toDataURL("image/png");
+  }
+  try { document.getElementById("pressed").src = pressedSunflower(); } catch (e){}
+
+  /* ---- landscape: two houses on two hills ---- */
+  function farY(x){
+    var u = x / W;
+    var hump = function(c, w, h){ return h * Math.exp(-Math.pow((u - c) / w, 2)); };
+    var hx = W < 640 ? .16 : .17;
+    return H * .84 - H * hump(hx, .17, .075) - H * hump(1 - hx, .17, .07)
+         + Math.sin(u * 17 + 1.3) * H * .004 + Math.sin(u * 5.1 + .4) * H * .008;
+  }
+  function nearY(x){
+    var u = x / W;
+    return H * .95 - H * .05 * Math.exp(-Math.pow((u - .5) / .24, 2))
+         + Math.sin(u * 7 + 2.1) * H * .006 + Math.sin(u * 23) * H * .002;
+  }
+
+  var houses = [];
+  function placeHouses(){
+    var hx = W < 640 ? .16 : .17;
+    var s = clamp(VU * 1.05, .7, 1.25);
+    houses = [
+      { x: W * hx,       flip: 1,  s: s, phase: .3 },
+      { x: W * (1 - hx), flip: -1, s: s, phase: 2.1 }
+    ];
+    houses.forEach(function(h){
+      h.y = farY(h.x) + 2;
+      h.wx = h.x + h.flip * -3.5 * h.s;
+      h.wy = h.y - 8 * h.s;
+    });
+  }
+
+  function drawHouse(h, now){
+    var s = h.s, x = h.x, y = h.y;
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.scale(h.flip, 1);
+    ctx.fillStyle = "#0B1026";
+    // tree
+    ctx.beginPath(); ctx.arc(19 * s, -9 * s, 7 * s, 0, TAU); ctx.arc(23 * s, -15 * s, 5.5 * s, 0, TAU); ctx.arc(16 * s, -16 * s, 5 * s, 0, TAU); ctx.fill();
+    ctx.fillRect(18.4 * s, -6 * s, 1.6 * s, 6 * s);
+    // house
+    ctx.beginPath();
+    ctx.moveTo(-12 * s, 0); ctx.lineTo(-12 * s, -14 * s); ctx.lineTo(-14 * s, -14 * s);
+    ctx.lineTo(0, -26 * s); ctx.lineTo(14 * s, -14 * s); ctx.lineTo(12 * s, -14 * s);
+    ctx.lineTo(12 * s, 0); ctx.closePath(); ctx.fill();
+    ctx.fillRect(5 * s, -26 * s, 3.4 * s, 8 * s);
+    // moonlit roof edge
+    ctx.strokeStyle = "rgba(190,200,240,.16)"; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(-14 * s, -14 * s); ctx.lineTo(0, -26 * s); ctx.lineTo(14 * s, -14 * s); ctx.stroke();
+    ctx.restore();
+
+    // a lit window, gently breathing
+    var fl = REDUCED ? 1 : .86 + Math.sin(now / 900 + h.phase) * .08 + Math.sin(now / 213 + h.phase) * .03;
+    ctx.fillStyle = "rgba(255,206,120," + fl.toFixed(3) + ")";
+    ctx.fillRect(h.wx - 2.6 * s, h.wy - 2.6 * s, 5.2 * s, 5.2 * s);
+    ctx.save();
+    ctx.globalCompositeOperation = "lighter";
+    ctx.globalAlpha = .55 * fl;
+    var gs = 46 * s;
+    ctx.drawImage(glow, h.wx - gs / 2, h.wy - gs / 2, gs, gs);
+    ctx.restore();
+  }
+
+  /* ---- stars ---- */
+  var stars = [];
+  for (var si = 0; si < 190; si++){
+    stars.push({
+      x: Math.random(), y: Math.pow(Math.random(), 1.3) * .8,
+      r: Math.random() * 1.1 + .25, tw: Math.random() * TAU, sp: .6 + Math.random() * 1.6,
+      warm: Math.random() < .18
+    });
+  }
+  var shooting = null, nextShoot = 6000 + Math.random() * 8000;
+
+  /* ---- candle ---- */
+  var candle = { a: 0, aTarget: 0, lit: 1, out: false, outAt: 0, wind: 0 };
+  var smoke = [];
+
+  function candleBase(){
+    return { x: W / 2, y: nearY(W / 2) - 2, s: clamp(VU * 1.15, .8, 1.35) };
+  }
+
+  function drawCandle(now, time){
+    if (candle.a <= .003) return;
+    var b = candleBase(), s = b.s, x = b.x, y = b.y;
+    var ch = 74 * s, cw = 13 * s;
+    ctx.save();
+    ctx.globalAlpha = candle.a;
+
+    // the warm pool it throws on the ground
+    if (candle.lit > 0){
+      ctx.save();
+      ctx.globalCompositeOperation = "lighter";
+      ctx.globalAlpha = candle.a * candle.lit * .32;
+      var pool = 520 * s;
+      ctx.drawImage(glow, x - pool / 2, y - ch - pool / 2, pool, pool);
+      ctx.restore();
+    }
+
+    // brass saucer
+    ctx.beginPath(); ctx.ellipse(x, y, 26 * s, 6 * s, 0, 0, TAU);
+    var sg = ctx.createLinearGradient(x - 26 * s, 0, x + 26 * s, 0);
+    sg.addColorStop(0, "#5A4126"); sg.addColorStop(.45, "#C9A15E"); sg.addColorStop(1, "#4A3420");
+    ctx.fillStyle = sg; ctx.fill();
+    ctx.beginPath(); ctx.ellipse(x, y - 2 * s, 18 * s, 3.6 * s, 0, 0, TAU);
+    ctx.fillStyle = "#2E2214"; ctx.fill();
+
+    // body, ivory with soft rose spirals
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(x - cw / 2, y - 2 * s);
+    ctx.lineTo(x - cw / 2, y - ch + 3 * s);
+    ctx.quadraticCurveTo(x, y - ch - 2 * s, x + cw / 2, y - ch + 3 * s);
+    ctx.lineTo(x + cw / 2, y - 2 * s);
+    ctx.closePath();
+    var bg = ctx.createLinearGradient(x - cw / 2, 0, x + cw / 2, 0);
+    bg.addColorStop(0, "#BFAFB2"); bg.addColorStop(.4, "#FBF2EE"); bg.addColorStop(1, "#A89497");
+    ctx.fillStyle = bg; ctx.fill();
+    ctx.clip();
+    ctx.strokeStyle = "rgba(226,140,150,.55)"; ctx.lineWidth = 3.2 * s;
+    for (var k = -2; k < 9; k++){
+      var yy = y - k * 11 * s;
+      ctx.beginPath(); ctx.moveTo(x - cw, yy); ctx.lineTo(x + cw, yy - 12 * s); ctx.stroke();
+    }
+    // candlelight on its own shoulder
+    var top = ctx.createLinearGradient(0, y - ch, 0, y - ch + 22 * s);
+    top.addColorStop(0, "rgba(255,226,160," + (.5 * candle.lit).toFixed(3) + ")");
+    top.addColorStop(1, "rgba(255,226,160,0)");
+    ctx.fillStyle = top; ctx.fillRect(x - cw, y - ch - 4 * s, cw * 2, 30 * s);
+    ctx.restore();
+
+    // wick
+    var wx = x, wy = y - ch;
+    ctx.strokeStyle = candle.out ? "#2A2522" : "#3B2A1E"; ctx.lineWidth = 1.6 * s; ctx.lineCap = "round";
+    ctx.beginPath(); ctx.moveTo(wx, wy); ctx.quadraticCurveTo(wx + 1 * s, wy - 4 * s, wx + .5 * s, wy - 7 * s); ctx.stroke();
+    if (candle.out && now - candle.outAt < 2600){
+      var ember = 1 - (now - candle.outAt) / 2600;
+      ctx.beginPath(); ctx.arc(wx + .5 * s, wy - 7 * s, 1.6 * s, 0, TAU);
+      ctx.fillStyle = "rgba(255,120,50," + (ember * .9).toFixed(3) + ")"; ctx.fill();
+    }
+
+    // flame
+    if (candle.lit > 0){
+      var L = candle.lit;
+      var flick = REDUCED ? 0 : Math.sin(time * 9.3) * .05 + Math.sin(time * 23.1) * .03 + Math.sin(time * 4.1) * .04;
+      var fh = (34 + candle.wind * 14) * s * (1 + flick) * L;
+      var fw = 8.5 * s * (1 - candle.wind * .25) * (.6 + .4 * L);
+      var lean = (REDUCED ? 0 : Math.sin(time * 1.7) * 1.6 + Math.sin(time * 5.3) * .7) * s + candle.wind * 16 * s;
+      var fx = wx + .5 * s, fy = wy - 5 * s;
+
+      ctx.save();
+      ctx.globalCompositeOperation = "lighter";
+      ctx.globalAlpha = candle.a * L * (.75 + flick * 2);
+      var gl = 150 * s;
+      ctx.drawImage(glow, fx + lean * .4 - gl / 2, fy - fh * .55 - gl / 2, gl, gl);
+      ctx.restore();
+
+      ctx.beginPath();
+      ctx.moveTo(fx + lean, fy - fh);
+      ctx.bezierCurveTo(fx + fw * 1.1 + lean * .35, fy - fh * .48, fx + fw, fy + fw * .2, fx, fy + fw * .35);
+      ctx.bezierCurveTo(fx - fw, fy + fw * .2, fx - fw * 1.1 + lean * .35, fy - fh * .48, fx + lean, fy - fh);
+      var fg = ctx.createRadialGradient(fx, fy - fh * .22, 0, fx + lean * .3, fy - fh * .4, fh * .8);
+      fg.addColorStop(0,   "rgba(255,255,240,1)");
+      fg.addColorStop(.35, "rgba(255,232,160,.98)");
+      fg.addColorStop(.7,  "rgba(255,160,60,.85)");
+      fg.addColorStop(1,   "rgba(230,90,30,0)");
+      ctx.fillStyle = fg; ctx.fill();
+
+      ctx.beginPath();
+      ctx.ellipse(fx, fy - fw * .1, fw * .42, fw * .7, 0, 0, TAU);
+      ctx.fillStyle = "rgba(110,140,255,.45)"; ctx.fill();
+    }
+    ctx.restore();
+  }
+
+  function drawSmoke(dt){
+    for (var i = smoke.length - 1; i >= 0; i--){
+      var p = smoke[i];
+      p.age += dt;
+      if (p.age > p.life){ smoke.splice(i, 1); continue; }
+      if (p.age < 0) continue;
+      var k = p.age / p.life;
+      p.y -= (24 + 20 * (1 - k)) * dt * p.s;
+      p.x += Math.sin(p.age * 2.2 + p.ph) * 12 * dt * p.s + p.drift * dt;
+      var r = (2 + k * 14) * p.s;
+      ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, TAU);
+      ctx.fillStyle = "rgba(200,205,225," + ((1 - k) * .14 * candle.a).toFixed(3) + ")";
+      ctx.fill();
+    }
+  }
+
+  /* ---- lanterns ---- */
+  var lanterns = [];
+
+  function releaseLantern(px, py){
+    var startY = Math.max(py, H * .66);
+    lanterns.push({
+      x: px, y: startY, y0: startY,
+      vy: (26 + Math.random() * 16) * (H / 820),
+      drift: (Math.random() - .5) * 8,
+      ph: Math.random() * TAU,
+      size: .85 + Math.random() * .35,
+      tilt: (Math.random() - .5) * .12,
+      born: performance.now()
+    });
+    if (lanterns.length > 60) lanterns.shift();
+  }
+
+  function drawLanterns(now, dt, time){
+    ctx.save();
+    for (var i = lanterns.length - 1; i >= 0; i--){
+      var l = lanterns[i];
+      var age = (now - l.born) / 1000;
+      var slow = clamp(1 - (l.y0 - l.y) / (H * 1.1), .35, 1);
+      l.y -= l.vy * slow * dt;
+      l.x += (Math.sin(time * .5 + l.ph) * 9 + l.drift + 4) * dt;
+      var rise = clamp((l.y0 - l.y) / (l.y0 + 40), 0, 1);
+      var sc = (1 - rise * .72) * l.size * VU * 1.1;
+      var born = REDUCED ? 1 : easeOut(clamp(age / .9, 0, 1));
+      var fade = clamp((l.y + 30) / (H * .14), 0, 1);
+      if (l.y < -60 || fade <= 0){ lanterns.splice(i, 1); continue; }
+      var flick = REDUCED ? 0 : Math.sin(time * 7 + l.ph * 3) * .06 + Math.sin(time * 17.3 + l.ph) * .04;
+      var a = fade * born;
+
+      ctx.globalCompositeOperation = "lighter";
+      ctx.globalAlpha = a * (.55 + flick);
+      var gsz = 150 * sc;
+      ctx.drawImage(glow, l.x - gsz / 2, l.y - gsz * .42, gsz, gsz);
+
+      ctx.globalCompositeOperation = "source-over";
+      ctx.globalAlpha = a;
+      var w = LW * sc * .9, h = LH * sc * .9;
+      ctx.save();
+      ctx.translate(l.x, l.y);
+      ctx.rotate(l.tilt + Math.sin(time * .8 + l.ph) * .05);
+      ctx.drawImage(lanternSprite, -w * born / 2, -h * born / 2, w * born, h * born);
+      ctx.restore();
+    }
+    ctx.restore();
+  }
+
+  /* ---- the name, written in lights ---- */
+  var lights = [], bridge = [], finaleAt = 0, bridgeAt = 0;
+
+  function nameLayout(){
+    var fs = Math.min(W * .36, H * .25, 260);
+    var probe = makeCanvas(10, 10).getContext("2d");
+    probe.font = fs + 'px "Pinyon Script", "Snell Roundhand", cursive';
+    var mw = probe.measureText("Zoha").width;
+    if (mw > W * .82) fs *= (W * .82) / mw;
+    var cy = H * (W < 640 ? .33 : .36);
+    return { fs: fs, cy: cy };
+  }
+
+  function nameTargets(n){
+    var lay = nameLayout();
+    var c = makeCanvas(Math.max(1, Math.round(W)), Math.max(1, Math.round(H)));
+    var g = c.getContext("2d");
+    g.fillStyle = "#fff";
+    g.textAlign = "center"; g.textBaseline = "middle";
+    g.font = lay.fs + 'px "Pinyon Script", "Snell Roundhand", cursive';
+    g.fillText("Zoha", W / 2, lay.cy);
+    var data = g.getImageData(0, 0, c.width, c.height).data;
+    var step = Math.max(2, Math.round(lay.fs / 52));
+    var pts = [];
+    for (var y = 0; y < c.height; y += step){
+      for (var x = 0; x < c.width; x += step){
+        if (data[(y * c.width + x) * 4 + 3] > 140) pts.push([x + (Math.random() - .5) * step * .6, y + (Math.random() - .5) * step * .6]);
+      }
+    }
+    for (var i = pts.length - 1; i > 0; i--){ var j = Math.floor(Math.random() * (i + 1)); var t = pts[i]; pts[i] = pts[j]; pts[j] = t; }
+    var out = [];
+    for (var k = 0; k < n; k++) out.push(pts.length ? pts[k % pts.length] : [W / 2, lay.cy]);
+    return out;
+  }
+
+  function buildLights(instant){
+    var n = W < 640 ? 380 : 620;
+    var targets = nameTargets(n);
+    lights = [];
+    for (var i = 0; i < n; i++){
+      var src;
+      if (lanterns.length && i < lanterns.length * 14){
+        var l = lanterns[i % lanterns.length];
+        src = [l.x + (Math.random() - .5) * 30, l.y + (Math.random() - .5) * 30];
+      } else {
+        var sx = Math.random() * W;
+        src = [sx, H * (.9 + Math.random() * .15)];
+      }
+      var tx = targets[i][0], ty = targets[i][1];
+      lights.push({
+        sx: src[0], sy: src[1], tx: tx, ty: ty,
+        cx: (src[0] + tx) / 2 + (Math.random() - .5) * W * .35,
+        cy: Math.min(src[1], ty) - Math.random() * H * .12,
+        delay: instant ? 0 : Math.random() * 2.4,
+        dur: instant ? 0 : 3 + Math.random() * 2.2,
+        r: .7 + Math.random() * 1.5,
+        tw: Math.random() * TAU
+      });
+    }
+  }
+
+  function retargetLights(){
+    if (!lights.length) return;
+    var targets = nameTargets(lights.length);
+    for (var i = 0; i < lights.length; i++){ lights[i].tx = targets[i][0]; lights[i].ty = targets[i][1]; }
+  }
+
+  function buildBridge(){
+    bridge = [];
+    if (houses.length < 2) return;
+    var a = houses[0], b = houses[1];
+    var cx = W / 2, cy = Math.min(a.wy, b.wy) - H * .11;
+    var N = W < 640 ? 26 : 40;
+    for (var i = 0; i < N; i++){
+      var t = i / (N - 1), it = 1 - t;
+      bridge.push({
+        x: it * it * a.wx + 2 * it * t * cx + t * t * b.wx,
+        y: it * it * a.wy + 2 * it * t * cy + t * t * b.wy,
+        d: Math.min(i, N - 1 - i),
+        ph: Math.random() * TAU
+      });
+    }
+  }
+
+  function drawLights(now, time){
+    if (!lights.length) return;
+    var el = (now - finaleAt) / 1000;
+    ctx.save();
+    ctx.globalCompositeOperation = "lighter";
+    for (var i = 0; i < lights.length; i++){
+      var p = lights[i];
+      var t = p.dur ? clamp((el - p.delay) / p.dur, 0, 1) : 1;
+      if (t <= 0) continue;
+      var e = ease(t), ie = 1 - e;
+      var x = ie * ie * p.sx + 2 * ie * e * p.cx + e * e * p.tx;
+      var y = ie * ie * p.sy + 2 * ie * e * p.cy + e * e * p.ty;
+      if (t >= 1 && !REDUCED){ x += Math.sin(time * .9 + p.tw) * .8; y += Math.cos(time * .7 + p.tw) * .8; }
+      var tw = REDUCED ? .9 : .7 + Math.sin(time * 2.2 + p.tw) * .3;
+      var sz = p.r * (t < 1 ? 9 : 7.5) * VU * 1.2;
+      ctx.globalAlpha = clamp(t * 3, 0, 1) * tw;
+      ctx.drawImage(glow, x - sz, y - sz, sz * 2, sz * 2);
+    }
+    ctx.restore();
+  }
+
+  function drawBridge(now, time){
+    if (!bridgeAt || !bridge.length) return;
+    var el = (now - bridgeAt) / 1000;
+    ctx.save();
+    ctx.globalCompositeOperation = "lighter";
+    for (var i = 0; i < bridge.length; i++){
+      var b = bridge[i];
+      var t = REDUCED ? 1 : clamp((el - b.d * .16) / .8, 0, 1);
+      if (t <= 0) continue;
+      var tw = REDUCED ? .85 : .7 + Math.sin(time * 2.6 + b.ph) * .3;
+      var sz = 13 * VU * (1 + (1 - t) * .8);
+      ctx.globalAlpha = easeOut(t) * tw * .95;
+      ctx.drawImage(glow, b.x - sz, b.y - sz, sz * 2, sz * 2);
+    }
+    ctx.restore();
+  }
+
+  /* ---- resize ---- */
+  function resize(){
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    cvs.width = Math.round(W * DPR); cvs.height = Math.round(H * DPR);
+    cvs.style.width = W + "px"; cvs.style.height = H + "px";
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    VU = .66 + .34 * clamp((W - 360) / 920, 0, 1);
+    var R = clamp(Math.min(W, H) * .075, 28, 72);
+    makeMoon(R);
+    moon.x = W * (W < 640 ? .78 : .8);
+    moon.y = H * (W < 640 ? .11 : .17);
+    placeHouses();
+    buildBridge();
+    retargetLights();
+    positionFinale();
+  }
+
+  /* ---- render loop ---- */
+  var start = performance.now(), last = start;
+
+  function frame(now){
+    var time = (now - start) / 1000;
+    var dt = Math.min(.1, (now - last) / 1000);
+    last = now;
+
+    candle.a += (candle.aTarget - candle.a) * (1 - Math.exp(-dt * 2.2));
+    moon.earth += (moon.earthTarget - moon.earth) * (1 - Math.exp(-dt * .6));
+    if (candle.out) candle.lit = Math.max(0, candle.lit - dt * 3.2);
+    pollMic(dt);
+
+    // sky
+    var hz = H * .86;
+    var sky = ctx.createLinearGradient(0, 0, 0, hz);
+    sky.addColorStop(0,   "#050817");
+    sky.addColorStop(.45, "#0C1432");
+    sky.addColorStop(.8,  "#1E2552");
+    sky.addColorStop(1,   "#3A3363");
+    ctx.fillStyle = sky; ctx.fillRect(0, 0, W, H);
+
+    // stars
+    for (var i = 0; i < stars.length; i++){
+      var st = stars[i];
+      var tw = REDUCED ? .8 : .55 + Math.sin(time * st.sp + st.tw) * .45;
+      ctx.beginPath();
+      ctx.arc(st.x * W, st.y * H, st.r, 0, TAU);
+      ctx.fillStyle = st.warm
+        ? "rgba(255,228,196," + (tw * .8).toFixed(3) + ")"
+        : "rgba(226,230,255," + (tw * .85).toFixed(3) + ")";
+      ctx.fill();
+    }
+
+    // a shooting star, every so often
+    if (!REDUCED){
+      nextShoot -= dt * 1000;
+      if (nextShoot <= 0 && !shooting){
+        shooting = { x: W * (.15 + Math.random() * .5), y: H * (.05 + Math.random() * .2), t: 0, ang: .35 + Math.random() * .3, len: 120 + Math.random() * 120 };
+        nextShoot = 9000 + Math.random() * 12000;
+      }
+      if (shooting){
+        shooting.t += dt / .9;
+        var sp = easeOut(Math.min(1, shooting.t));
+        var hx = shooting.x + Math.cos(shooting.ang) * shooting.len * 2 * sp;
+        var hy = shooting.y + Math.sin(shooting.ang) * shooting.len * 2 * sp;
+        var tx = hx - Math.cos(shooting.ang) * shooting.len * (1 - sp * .5);
+        var ty = hy - Math.sin(shooting.ang) * shooting.len * (1 - sp * .5);
+        var sg = ctx.createLinearGradient(tx, ty, hx, hy);
+        var sa = Math.sin(Math.min(1, shooting.t) * Math.PI);
+        sg.addColorStop(0, "rgba(255,255,255,0)");
+        sg.addColorStop(1, "rgba(255,255,255," + (sa * .85).toFixed(3) + ")");
+        ctx.strokeStyle = sg; ctx.lineWidth = 1.4; ctx.lineCap = "round";
+        ctx.beginPath(); ctx.moveTo(tx, ty); ctx.lineTo(hx, hy); ctx.stroke();
+        if (shooting.t >= 1) shooting = null;
+      }
+    }
+
+    // moon halo, then the moon
+    var halo = ctx.createRadialGradient(moon.x, moon.y, moon.R * .9, moon.x, moon.y, moon.R * 7);
+    halo.addColorStop(0, "rgba(200,212,255,.20)");
+    halo.addColorStop(.3, "rgba(170,180,240,.07)");
+    halo.addColorStop(1, "rgba(170,180,240,0)");
+    ctx.fillStyle = halo; ctx.fillRect(0, 0, W, H);
+    var ms = moon.S;
+    ctx.save();
+    ctx.globalAlpha = moon.earth;
+    ctx.drawImage(moon.dark, moon.x - ms / 2, moon.y - ms / 2, ms, ms);
+    ctx.globalAlpha = 1;
+    ctx.drawImage(moon.lit, moon.x - ms / 2, moon.y - ms / 2, ms, ms);
+    ctx.restore();
+
+    // glow along the horizon
+    var hg = ctx.createLinearGradient(0, H * .7, 0, H * .86);
+    hg.addColorStop(0, "rgba(120,90,160,0)");
+    hg.addColorStop(1, "rgba(150,110,170,.18)");
+    ctx.fillStyle = hg; ctx.fillRect(0, H * .7, W, H * .16);
+
+    // far hills with the two houses
+    ctx.beginPath(); ctx.moveTo(0, H);
+    for (var x = 0; x <= W + 8; x += 8) ctx.lineTo(x, farY(x));
+    ctx.lineTo(W, H); ctx.closePath();
+    var fh = ctx.createLinearGradient(0, H * .74, 0, H);
+    fh.addColorStop(0, "#151B3C"); fh.addColorStop(1, "#0B0F25");
+    ctx.fillStyle = fh; ctx.fill();
+    ctx.strokeStyle = "rgba(180,190,240,.10)"; ctx.lineWidth = 1;
+    ctx.beginPath();
+    for (var x2 = 0; x2 <= W + 8; x2 += 8){ if (x2 === 0) ctx.moveTo(x2, farY(x2)); else ctx.lineTo(x2, farY(x2)); }
+    ctx.stroke();
+
+    for (var h = 0; h < houses.length; h++) drawHouse(houses[h], now);
+    drawBridge(now, time);
+
+    // near hill
+    ctx.beginPath(); ctx.moveTo(0, H);
+    for (var x3 = 0; x3 <= W + 8; x3 += 8) ctx.lineTo(x3, nearY(x3));
+    ctx.lineTo(W, H); ctx.closePath();
+    ctx.fillStyle = "#070A1A"; ctx.fill();
+
+    drawCandle(now, time);
+    drawSmoke(dt);
+    drawLanterns(now, dt, time);
+    drawLights(now, time);
+
+    requestAnimationFrame(frame);
+  }
+
+  /* ================= sound (synthesised, nothing to download) ================= */
+
+  var AC = null, master = null, wet = null, soundOn = true;
+
+  function ensureAudio(){
+    if (AC) { if (AC.state === "suspended") AC.resume(); return; }
+    var Ctor = window.AudioContext || window.webkitAudioContext;
+    if (!Ctor) return;
+    try {
+      AC = new Ctor();
+      master = AC.createGain(); master.gain.value = soundOn ? .9 : 0; master.connect(AC.destination);
+      // a little shimmer: a filtered echo
+      var delay = AC.createDelay(1); delay.delayTime.value = .27;
+      var fb = AC.createGain(); fb.gain.value = .32;
+      var lp = AC.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 2400;
+      wet = AC.createGain(); wet.gain.value = .32;
+      wet.connect(delay); delay.connect(lp); lp.connect(fb); fb.connect(delay); lp.connect(master);
+    } catch (e){ AC = null; }
+  }
+
+  function bell(freq, t, vol, dur){
+    if (!AC) return;
+    var g = AC.createGain();
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(vol, t + .006);
+    g.gain.exponentialRampToValueAtTime(.0001, t + (dur || 1.6));
+    g.connect(master); g.connect(wet);
+    [[1, 1], [2, .28], [3.01, .09], [4.2, .04]].forEach(function(h){
+      var o = AC.createOscillator(), og = AC.createGain();
+      o.type = "sine"; o.frequency.value = freq * h[0];
+      og.gain.value = h[1];
+      o.connect(og); og.connect(g);
+      o.start(t); o.stop(t + (dur || 1.6) + .05);
+    });
+  }
+
+  var PENTA = [523.25, 587.33, 659.25, 783.99, 880.00, 1046.5];
+  function chime(){
+    if (!AC || !soundOn) return;
+    bell(PENTA[Math.floor(Math.random() * PENTA.length)], AC.currentTime + .02, .07, 2.2);
+  }
+
+  function whoosh(){
+    if (!AC || !soundOn) return;
+    var len = Math.floor(AC.sampleRate * .6), buf = AC.createBuffer(1, len, AC.sampleRate), d = buf.getChannelData(0);
+    for (var i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2);
+    var src = AC.createBufferSource(); src.buffer = buf;
+    var bp = AC.createBiquadFilter(); bp.type = "bandpass"; bp.frequency.value = 900; bp.Q.value = .7;
+    var g = AC.createGain(); g.gain.value = .12;
+    src.connect(bp); bp.connect(g); g.connect(master);
+    src.start();
+  }
+
+  // Happy Birthday, as a music box
+  function playBirthdaySong(){
+    if (!AC || !soundOn) return;
+    var G4=392, A4=440, B4=493.88, C5=523.25, D5=587.33, E5=659.25, F5=698.46, G5=783.99;
+    var song = [
+      [G4,.75],[G4,.25],[A4,1],[G4,1],[C5,1],[B4,2],
+      [G4,.75],[G4,.25],[A4,1],[G4,1],[D5,1],[C5,2],
+      [G4,.75],[G4,.25],[G5,1],[E5,1],[C5,1],[B4,1],[A4,2],
+      [F5,.75],[F5,.25],[E5,1],[C5,1],[D5,1],[C5,3]
+    ];
+    var beat = .46, t = AC.currentTime + .15;
+    song.forEach(function(n, i){
+      bell(n[0], t, .11, Math.max(1.2, n[1] * beat * 2.4));
+      if (i === 0 || i === 6 || i === 12 || i === 19) bell(n[0] / 2, t, .05, 2.6);
+      t += n[1] * beat;
+    });
+  }
+
+  /* ================= microphone, for really blowing the candle out ================= */
+
+  var mic = { on: false, stream: null, analyser: null, buf: null, over: 0 };
+
+  function startMic(){
+    ensureAudio();
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || !AC){
+      micFailed(); return;
+    }
+    micMsg("Allow the microphone, then blow on your screen.");
+    navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false } })
+      .then(function(stream){
+        if (candle.out){ stream.getTracks().forEach(function(t){ t.stop(); }); return; }
+        mic.stream = stream;
+        var src = AC.createMediaStreamSource(stream);
+        mic.analyser = AC.createAnalyser();
+        mic.analyser.fftSize = 1024;
+        mic.buf = new Float32Array(mic.analyser.fftSize);
+        src.connect(mic.analyser);
+        mic.on = true;
+        micMsg("I’m listening. Blow.");
+      })
+      .catch(micFailed);
+  }
+  function micFailed(){
+    micMsg("The microphone isn’t available here. Tap the flame instead.");
+  }
+  function micMsg(t){
+    var m = document.getElementById("micNote");
+    if (m) m.textContent = t;
+  }
+  function stopMic(){
+    mic.on = false;
+    if (mic.stream) mic.stream.getTracks().forEach(function(t){ t.stop(); });
+    mic.stream = null;
+  }
+  function pollMic(dt){
+    if (!mic.on || !mic.analyser) { candle.wind *= .9; return; }
+    mic.analyser.getFloatTimeDomainData(mic.buf);
+    var sum = 0;
+    for (var i = 0; i < mic.buf.length; i++) sum += mic.buf[i] * mic.buf[i];
+    var rms = Math.sqrt(sum / mic.buf.length);
+    candle.wind += (clamp(rms * 4, 0, 1) - candle.wind) * .3;
+    if (rms > .11) mic.over += dt; else mic.over = Math.max(0, mic.over - dt * .5);
+    if (mic.over > .28) blowOut();
+  }
+
+  /* ================= the experience ================= */
+
+  var intro     = document.getElementById("intro");
+  var lede      = document.getElementById("lede");
+  var countdown = document.getElementById("countdown");
+  var startBtn  = document.getElementById("startBtn");
+  var skipBtn   = document.getElementById("skipBtn");
+  var caption   = document.getElementById("caption");
+  var hud       = document.getElementById("hud");
+  var hudLabel  = document.getElementById("hudLabel");
+  var dotsEl    = document.getElementById("dots");
+  var actions   = document.getElementById("actions");
+  var finale    = document.getElementById("finale");
+  var letterWrap= document.getElementById("letterWrap");
+  var letter    = document.getElementById("letter");
+  var closeBtn  = document.getElementById("closeLetter");
+  var soundBtn  = document.getElementById("soundBtn");
+  var soundText = document.getElementById("soundText");
+
+  var stage = "intro";
+  var sent = 0, extraIdx = 0, capTimer = null;
+
+  function show(el){ el.classList.remove("is-hidden"); el.classList.add("is-shown"); }
+  function hide(el){ el.classList.remove("is-shown"); el.classList.add("is-hidden"); }
+
+  function button(label, cls, fn){
+    var b = document.createElement("button");
+    b.type = "button"; b.className = cls; b.textContent = label;
+    b.addEventListener("click", function(e){ e.stopPropagation(); fn(); });
+    return b;
+  }
+
+  function setCaption(badge, html, controls){
+    caption.classList.remove("show");
+    clearTimeout(capTimer);
+    capTimer = setTimeout(function(){
+      caption.innerHTML = '<span class="count">' + badge + "</span>" + html;
+      caption.classList.toggle("interactive", !!controls);
+      if (controls){
+        var row = document.createElement("div");
+        row.className = "cap-actions";
+        controls.forEach(function(c){ row.appendChild(c); });
+        caption.appendChild(row);
+        var note = document.createElement("p");
+        note.className = "cap-note"; note.id = "micNote";
+        caption.appendChild(note);
+      }
+      caption.classList.add("show");
+    }, REDUCED ? 80 : 650);
+  }
+
+  function positionFinale(){
+    var lay = nameLayout();
+    finale.style.top = Math.round(lay.cy + lay.fs * .42) + "px";
+  }
+
+  /* ---- storage ---- */
+  function load(){ try { return JSON.parse(localStorage.getItem(STORE) || "null"); } catch (e){ return null; } }
+  function save(data){ try { localStorage.setItem(STORE, JSON.stringify(data)); } catch (e){} }
+
+  /* ---- countdown to her birthday, in her own time zone ---- */
+  function tick(){
+    var ms = BIRTHDAY - new Date();
+    if (ms > 0 && ms < 1000 * 60 * 60 * 24 * 40){
+      var s = Math.floor(ms / 1000);
+      var d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), m = Math.floor(s % 3600 / 60), ss = s % 60;
+      var p2 = function(n){ return (n < 10 ? "0" : "") + n; };
+      countdown.innerHTML = "Your birthday begins in <b>" + (d ? d + "d " : "") + p2(h) + ":" + p2(m) + ":" + p2(ss) + "</b>";
+      countdown.hidden = false;
+    } else if (ms <= 0 && ms > -1000 * 60 * 60 * 24){
+      countdown.innerHTML = "<b>It&rsquo;s today.</b> It&rsquo;s finally today.";
+      countdown.hidden = false;
+    } else {
+      countdown.hidden = true;
+    }
+  }
+
+  /* ---- stage 1: the candle ---- */
+  function goCandle(){
+    ensureAudio();
+    stage = "candle";
+    show(soundBtn);
+    intro.classList.add("is-hidden");
+    setTimeout(function(){ intro.hidden = true; }, 1150);
+    candle.aTarget = 1; candle.out = false; candle.lit = 1;
+    var controls = [button("Blow it out", "btn-ghost", blowOut)];
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia){
+      controls.push(button("Really blow (uses mic)", "btn-ghost", startMic));
+    }
+    setCaption("First, a wish", "Before anything else, this part is yours. Close your eyes, make a wish, then tap the flame. I won&rsquo;t ask what it was.", controls);
+  }
+
+  function blowOut(){
+    if (stage !== "candle" || candle.out) return;
+    candle.out = true; candle.outAt = performance.now();
+    stopMic();
+    whoosh();
+    var b = candleBase();
+    var wy = b.y - 74 * b.s - 7 * b.s;
+    for (var i = 0; i < 46; i++){
+      smoke.push({ x: b.x, y: wy, age: -i * .045, life: 3.4 + Math.random(), ph: Math.random() * TAU, s: b.s, drift: (Math.random() - .3) * 6 });
+    }
+    hide(hud);
+    setCaption("Your wish", "Whatever you wished for, I hope it finds you this year. Now let me send up mine.");
+    setTimeout(function(){ candle.aTarget = 0; }, 2400);
+    setTimeout(goLanterns, REDUCED ? 1200 : 3800);
+  }
+
+  /* ---- stage 2: lanterns ---- */
+  function goLanterns(){
+    stage = "lanterns";
+    dotsEl.innerHTML = "";
+    for (var i = 0; i < WISHES.length; i++) dotsEl.appendChild(document.createElement("span"));
+    actions.innerHTML = "";
+    actions.appendChild(button("Let one go", "btn-ghost", function(){ sendLantern(W * (.2 + Math.random() * .6), H); }));
+    updateHud();
+    show(hud);
+  }
+
+  function updateHud(){
+    var dots = dotsEl.querySelectorAll("span");
+    for (var i = 0; i < dots.length; i++) dots[i].classList.toggle("on", i < sent);
+    if (stage === "lanterns"){
+      var left = WISHES.length - sent;
+      hudLabel.textContent = sent === 0
+        ? "Tap anywhere to let a lantern go"
+        : left === 1 ? "One more. The last one is for us" : left + " lanterns still waiting";
+    }
+  }
+
+  function sendLantern(px, py){
+    releaseLantern(px, py);
+    chime();
+    if (stage === "lanterns"){
+      sent++;
+      setCaption("Lantern " + sent + " of " + WISHES.length, WISHES[sent - 1]);
+      updateHud();
+      if (sent === WISHES.length){
+        stage = "waiting";
+        setTimeout(function(){ hide(hud); }, 600);
+        setTimeout(goFinale, REDUCED ? 3500 : 6500);
+      }
+    } else if (stage === "free"){
+      setCaption("One more", EXTRA[extraIdx % EXTRA.length]);
+      extraIdx++;
+    }
+  }
+
+  /* ---- stage 3: her name in the sky, a bridge between the houses ---- */
+  function goFinale(instant){
+    stage = "finale";
+    caption.classList.remove("show");
+    hide(hud);
+    save({ done: true });
+    var run = function(){
+      finaleAt = performance.now();
+      buildLights(instant || REDUCED);
+      bridgeAt = finaleAt + (instant || REDUCED ? -20000 : 1400);
+      moon.earthTarget = .85;
+      positionFinale();
+      if (!instant) playBirthdaySong();
+      setTimeout(function(){ show(finale); }, instant ? 0 : 4200);
+      setTimeout(openLetter, instant ? 300 : 11000);
+    };
+    // the name is drawn in Pinyon Script; make sure the face is ready before sampling it
+    if (document.fonts && document.fonts.load){
+      Promise.race([
+        document.fonts.load('120px "Pinyon Script"', "Zoha"),
+        new Promise(function(r){ setTimeout(r, 1500); })
+      ]).then(run, run);
+    } else run();
+  }
+
+  /* ---- the letter ---- */
+  function openLetter(){
+    stage = "letter";
+    caption.classList.remove("show");
+    hide(hud);
+    letterWrap.classList.add("show");
+    letter.scrollTop = 0;
+    setTimeout(function(){ letter.focus({ preventScroll: true }); }, 400);
+  }
+
+  function closeLetter(){
+    stage = "free";
+    letterWrap.classList.remove("show");
+    dotsEl.innerHTML = "";
+    actions.innerHTML = "";
+    hudLabel.textContent = "The sky is still yours. Keep going";
+    actions.appendChild(button("Let one go", "btn-ghost", function(){ sendLantern(W * (.2 + Math.random() * .6), H); }));
+    actions.appendChild(button("Read the letter again", "btn-ghost", openLetter));
+    show(hud);
+  }
+
+  /* ---- events ---- */
+  startBtn.addEventListener("click", function(e){ e.stopPropagation(); goCandle(); });
+  skipBtn.addEventListener("click", function(e){
+    e.stopPropagation();
+    ensureAudio();
+    show(soundBtn);
+    intro.classList.add("is-hidden");
+    setTimeout(function(){ intro.hidden = true; }, 1150);
+    goFinale(true);
+  });
+  closeBtn.addEventListener("click", closeLetter);
+  letterWrap.addEventListener("click", function(e){ if (e.target === letterWrap) closeLetter(); });
+  document.addEventListener("keydown", function(e){
+    if (e.key === "Escape" && stage === "letter") closeLetter();
+  });
+
+  soundBtn.addEventListener("click", function(e){
+    e.stopPropagation();
+    soundOn = !soundOn;
+    ensureAudio();
+    if (master) master.gain.setTargetAtTime(soundOn ? .9 : 0, AC.currentTime, .05);
+    soundBtn.setAttribute("aria-pressed", soundOn ? "true" : "false");
+    soundText.textContent = soundOn ? "Sound on" : "Sound off";
+  });
+
+  cvs.addEventListener("pointerdown", function(e){
+    if (stage === "candle"){ ensureAudio(); blowOut(); return; }
+    if (stage === "lanterns" || stage === "free"){ ensureAudio(); sendLantern(e.clientX, e.clientY); }
+  });
+
+  window.addEventListener("resize", resize);
+
+  /* ---- boot ---- */
+  resize();
+  tick();
+  setInterval(tick, 1000);
+
+  var saved = load();
+  if (saved && saved.done){
+    skipBtn.hidden = false;
+    startBtn.textContent = "Do it all again";
+    lede.innerHTML = "You came back. The moon is still half lit, the lanterns are still waiting, and so am I.";
+  }
+
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
